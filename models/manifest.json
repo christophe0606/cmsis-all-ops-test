@@ -1,0 +1,4933 @@
+[
+  {
+    "op": "adaptive_avg_pool2d",
+    "category": "Portable",
+    "dir": "portable__adaptive_avg_pool2d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "conj_physical",
+    "category": "Portable",
+    "dir": "portable__conj_physical",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "abs",
+    "category": "Portable",
+    "dir": "portable__abs",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "acos",
+    "category": "Portable",
+    "dir": "portable__acos",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "acosh",
+    "category": "Portable",
+    "dir": "portable__acosh",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "add",
+    "category": "Portable",
+    "dir": "portable__add",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "addmm",
+    "category": "Portable",
+    "dir": "portable__addmm",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      },
+      {
+        "file": "input_2.bin",
+        "dtype": "float32",
+        "shape": [
+          4,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "alias_copy",
+    "category": "Portable",
+    "dir": "portable__alias_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "amax",
+    "category": "Portable",
+    "dir": "portable__amax",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "amin",
+    "category": "Portable",
+    "dir": "portable__amin",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "any",
+    "category": "Portable",
+    "dir": "portable__any",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "argmax",
+    "category": "Portable",
+    "dir": "portable__argmax",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int64",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "argmin",
+    "category": "Portable",
+    "dir": "portable__argmin",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int64",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "as_strided_copy",
+    "category": "Portable",
+    "dir": "portable__as_strided_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "asin",
+    "category": "Portable",
+    "dir": "portable__asin",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "asinh",
+    "category": "Portable",
+    "dir": "portable__asinh",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "atan",
+    "category": "Portable",
+    "dir": "portable__atan",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "atan2",
+    "category": "Portable",
+    "dir": "portable__atan2",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "atanh",
+    "category": "Portable",
+    "dir": "portable__atanh",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "avg_pool2d",
+    "category": "Portable",
+    "dir": "portable__avg_pool2d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "bitwise_and",
+    "category": "Portable",
+    "dir": "portable__bitwise_and",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "bitwise_left_shift",
+    "category": "Portable",
+    "dir": "portable__bitwise_left_shift",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "bitwise_not",
+    "category": "Portable",
+    "dir": "portable__bitwise_not",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "bitwise_or",
+    "category": "Portable",
+    "dir": "portable__bitwise_or",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "bitwise_right_shift",
+    "category": "Portable",
+    "dir": "portable__bitwise_right_shift",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "bitwise_xor",
+    "category": "Portable",
+    "dir": "portable__bitwise_xor",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "bmm",
+    "category": "Portable",
+    "dir": "portable__bmm",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "cat",
+    "category": "Portable",
+    "dir": "portable__cat",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "ceil",
+    "category": "Portable",
+    "dir": "portable__ceil",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "clamp",
+    "category": "Portable",
+    "dir": "portable__clamp",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "clone",
+    "category": "Portable",
+    "dir": "portable__clone",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "constant_pad_nd",
+    "category": "Portable",
+    "dir": "portable__constant_pad_nd",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "op": "convolution",
+    "category": "Portable",
+    "dir": "portable__convolution",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6,
+          6
+        ]
+      }
+    ]
+  },
+  {
+    "op": "copy",
+    "category": "Portable",
+    "dir": "portable__copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "cos",
+    "category": "Portable",
+    "dir": "portable__cos",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "cosh",
+    "category": "Portable",
+    "dir": "portable__cosh",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "cumsum",
+    "category": "Portable",
+    "dir": "portable__cumsum",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "detach_copy",
+    "category": "Portable",
+    "dir": "portable__detach_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "diagonal_copy",
+    "category": "Portable",
+    "dir": "portable__diagonal_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "div",
+    "category": "Portable",
+    "dir": "portable__div",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "elu",
+    "category": "Portable",
+    "dir": "portable__elu",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "embedding",
+    "category": "Portable",
+    "dir": "portable__embedding",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int64",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "eq",
+    "category": "Portable",
+    "dir": "portable__eq",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "erf",
+    "category": "Portable",
+    "dir": "portable__erf",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "exp",
+    "category": "Portable",
+    "dir": "portable__exp",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "expand_copy",
+    "category": "Portable",
+    "dir": "portable__expand_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "expm1",
+    "category": "Portable",
+    "dir": "portable__expm1",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "fill",
+    "category": "Portable",
+    "dir": "portable__fill",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "flip",
+    "category": "Portable",
+    "dir": "portable__flip",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "floor",
+    "category": "Portable",
+    "dir": "portable__floor",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "floor_divide",
+    "category": "Portable",
+    "dir": "portable__floor_divide",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "fmod",
+    "category": "Portable",
+    "dir": "portable__fmod",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "full_like",
+    "category": "Portable",
+    "dir": "portable__full_like",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "gather",
+    "category": "Portable",
+    "dir": "portable__gather",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "ge",
+    "category": "Portable",
+    "dir": "portable__ge",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "gelu",
+    "category": "Portable",
+    "dir": "portable__gelu",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "glu",
+    "category": "Portable",
+    "dir": "portable__glu",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "gt",
+    "category": "Portable",
+    "dir": "portable__gt",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "hardtanh",
+    "category": "Portable",
+    "dir": "portable__hardtanh",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "index",
+    "category": "Portable",
+    "dir": "portable__index",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "index_put",
+    "category": "Portable",
+    "dir": "portable__index_put",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "index_select",
+    "category": "Portable",
+    "dir": "portable__index_select",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "isinf",
+    "category": "Portable",
+    "dir": "portable__isinf",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "isnan",
+    "category": "Portable",
+    "dir": "portable__isnan",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "le",
+    "category": "Portable",
+    "dir": "portable__le",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "leaky_relu",
+    "category": "Portable",
+    "dir": "portable__leaky_relu",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "lift_fresh_copy",
+    "category": "Portable",
+    "dir": "portable__lift_fresh_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "log",
+    "category": "Portable",
+    "dir": "portable__log",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "log10",
+    "category": "Portable",
+    "dir": "portable__log10",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "log1p",
+    "category": "Portable",
+    "dir": "portable__log1p",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "log2",
+    "category": "Portable",
+    "dir": "portable__log2",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "log_softmax",
+    "category": "Portable",
+    "dir": "portable__log_softmax",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "logical_and",
+    "category": "Portable",
+    "dir": "portable__logical_and",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "logical_not",
+    "category": "Portable",
+    "dir": "portable__logical_not",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "logical_or",
+    "category": "Portable",
+    "dir": "portable__logical_or",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "logical_xor",
+    "category": "Portable",
+    "dir": "portable__logical_xor",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "logit",
+    "category": "Portable",
+    "dir": "portable__logit",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "lt",
+    "category": "Portable",
+    "dir": "portable__lt",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "masked_fill",
+    "category": "Portable",
+    "dir": "portable__masked_fill",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "bool",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "masked_scatter",
+    "category": "Portable",
+    "dir": "portable__masked_scatter",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "max",
+    "category": "Portable",
+    "dir": "portable__max",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "int64",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "max_pool2d_with_indices",
+    "category": "Portable",
+    "dir": "portable__max_pool2d_with_indices",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "int64",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "maximum",
+    "category": "Portable",
+    "dir": "portable__maximum",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "mean",
+    "category": "Portable",
+    "dir": "portable__mean",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "min",
+    "category": "Portable",
+    "dir": "portable__min",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "int64",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "minimum",
+    "category": "Portable",
+    "dir": "portable__minimum",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "mm",
+    "category": "Portable",
+    "dir": "portable__mm",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          4,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "mul",
+    "category": "Portable",
+    "dir": "portable__mul",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "narrow_copy",
+    "category": "Portable",
+    "dir": "portable__narrow_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "native_batch_norm",
+    "category": "Portable",
+    "dir": "portable__native_batch_norm",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "native_group_norm",
+    "category": "Portable",
+    "dir": "portable__native_group_norm",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "native_layer_norm",
+    "category": "Portable",
+    "dir": "portable__native_layer_norm",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "ne",
+    "category": "Portable",
+    "dir": "portable__ne",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "bool",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "neg",
+    "category": "Portable",
+    "dir": "portable__neg",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "permute_copy",
+    "category": "Portable",
+    "dir": "portable__permute_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "pixel_shuffle",
+    "category": "Portable",
+    "dir": "portable__pixel_shuffle",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8,
+          4,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "pixel_unshuffle",
+    "category": "Portable",
+    "dir": "portable__pixel_unshuffle",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "pow",
+    "category": "Portable",
+    "dir": "portable__pow",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "prod",
+    "category": "Portable",
+    "dir": "portable__prod",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "reciprocal",
+    "category": "Portable",
+    "dir": "portable__reciprocal",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "reflection_pad1d",
+    "category": "Portable",
+    "dir": "portable__reflection_pad1d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "reflection_pad2d",
+    "category": "Portable",
+    "dir": "portable__reflection_pad2d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "reflection_pad3d",
+    "category": "Portable",
+    "dir": "portable__reflection_pad3d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          4,
+          6,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "relu",
+    "category": "Portable",
+    "dir": "portable__relu",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "remainder",
+    "category": "Portable",
+    "dir": "portable__remainder",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "repeat",
+    "category": "Portable",
+    "dir": "portable__repeat",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          4,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "repeat_interleave",
+    "category": "Portable",
+    "dir": "portable__repeat_interleave",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          6
+        ]
+      }
+    ]
+  },
+  {
+    "op": "replication_pad1d",
+    "category": "Portable",
+    "dir": "portable__replication_pad1d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "replication_pad2d",
+    "category": "Portable",
+    "dir": "portable__replication_pad2d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "replication_pad3d",
+    "category": "Portable",
+    "dir": "portable__replication_pad3d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          4,
+          6,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "roll",
+    "category": "Portable",
+    "dir": "portable__roll",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "round",
+    "category": "Portable",
+    "dir": "portable__round",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "rsqrt",
+    "category": "Portable",
+    "dir": "portable__rsqrt",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "rsub",
+    "category": "Portable",
+    "dir": "portable__rsub",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "scatter",
+    "category": "Portable",
+    "dir": "portable__scatter",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "scatter_add",
+    "category": "Portable",
+    "dir": "portable__scatter_add",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "select_copy",
+    "category": "Portable",
+    "dir": "portable__select_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "select_scatter",
+    "category": "Portable",
+    "dir": "portable__select_scatter",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "sigmoid",
+    "category": "Portable",
+    "dir": "portable__sigmoid",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "sign",
+    "category": "Portable",
+    "dir": "portable__sign",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "sin",
+    "category": "Portable",
+    "dir": "portable__sin",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "sinh",
+    "category": "Portable",
+    "dir": "portable__sinh",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "slice_copy",
+    "category": "Portable",
+    "dir": "portable__slice_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "slice_scatter",
+    "category": "Portable",
+    "dir": "portable__slice_scatter",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "softmax",
+    "category": "Portable",
+    "dir": "portable__softmax",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "split_copy",
+    "category": "Portable",
+    "dir": "portable__split_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          1
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          1
+        ]
+      },
+      {
+        "file": "expected_2.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "op": "split_with_sizes_copy",
+    "category": "Portable",
+    "dir": "portable__split_with_sizes_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          1
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "sqrt",
+    "category": "Portable",
+    "dir": "portable__sqrt",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "squeeze_copy",
+    "category": "Portable",
+    "dir": "portable__squeeze_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "stack",
+    "category": "Portable",
+    "dir": "portable__stack",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "sub",
+    "category": "Portable",
+    "dir": "portable__sub",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "sum",
+    "category": "Portable",
+    "dir": "portable__sum",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "t_copy",
+    "category": "Portable",
+    "dir": "portable__t_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "tan",
+    "category": "Portable",
+    "dir": "portable__tan",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "tanh",
+    "category": "Portable",
+    "dir": "portable__tanh",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "to_copy",
+    "category": "Portable",
+    "dir": "portable__to_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "int32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "topk",
+    "category": "Portable",
+    "dir": "portable__topk",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          2
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "int64",
+        "shape": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "transpose_copy",
+    "category": "Portable",
+    "dir": "portable__transpose_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "tril",
+    "category": "Portable",
+    "dir": "portable__tril",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "trunc",
+    "category": "Portable",
+    "dir": "portable__trunc",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "unbind_copy",
+    "category": "Portable",
+    "dir": "portable__unbind_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "unfold_copy",
+    "category": "Portable",
+    "dir": "portable__unfold_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "op": "unsqueeze_copy",
+    "category": "Portable",
+    "dir": "portable__unsqueeze_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "upsample_bilinear2d",
+    "category": "Portable",
+    "dir": "portable__upsample_bilinear2d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "upsample_nearest2d",
+    "category": "Portable",
+    "dir": "portable__upsample_nearest2d",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "var",
+    "category": "Portable",
+    "dir": "portable__var",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "var_mean",
+    "category": "Portable",
+    "dir": "portable__var_mean",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      },
+      {
+        "file": "expected_1.bin",
+        "dtype": "float32",
+        "shape": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "view_copy",
+    "category": "Portable",
+    "dir": "portable__view_copy",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          2,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          6
+        ]
+      }
+    ]
+  },
+  {
+    "op": "where",
+    "category": "Portable",
+    "dir": "portable__where",
+    "atol": 0.001,
+    "rtol": 0.001,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "bool",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3
+        ]
+      },
+      {
+        "file": "input_2.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "op": "dequantize_per_tensor",
+    "category": "Cortex-M",
+    "dir": "cortex_m__dequantize_per_tensor",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "maximum",
+    "category": "Cortex-M",
+    "dir": "cortex_m__maximum",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "minimum",
+    "category": "Cortex-M",
+    "dir": "cortex_m__minimum",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "pad",
+    "category": "Cortex-M",
+    "dir": "cortex_m__pad",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantize_per_tensor",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantize_per_tensor",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_add",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_add",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_avg_pool2d",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_avg_pool2d",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_batch_matmul",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_batch_matmul",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          6
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          6,
+          4
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_conv2d",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_conv2d",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          6,
+          6
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_depthwise_conv2d",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_depthwise_conv2d",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_linear",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_linear",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_max_pool2d",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_max_pool2d",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_mul",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_mul",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      },
+      {
+        "file": "input_1.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "quantized_transpose_conv2d",
+    "category": "Cortex-M",
+    "dir": "cortex_m__quantized_transpose_conv2d",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          2,
+          8,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          3,
+          10,
+          10
+        ]
+      }
+    ]
+  },
+  {
+    "op": "softmax",
+    "category": "Cortex-M",
+    "dir": "cortex_m__softmax",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          8
+        ]
+      }
+    ]
+  },
+  {
+    "op": "transpose",
+    "category": "Cortex-M",
+    "dir": "cortex_m__transpose",
+    "atol": 0.02,
+    "rtol": 0.02,
+    "inputs": [
+      {
+        "file": "input_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          4,
+          6
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "file": "expected_0.bin",
+        "dtype": "float32",
+        "shape": [
+          1,
+          6,
+          4
+        ]
+      }
+    ]
+  }
+]

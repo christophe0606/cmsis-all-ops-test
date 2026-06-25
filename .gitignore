@@ -1,0 +1,13 @@
+# csolution / cbuild generated build artifacts
+RTE/
+out/
+tmp/
+*.cbuild-idx.yml
+*.cbuild-pack.yml
+*.cbuild-set.yml
+*.cbuild-run.yml
+__pycache__/
+
+# models/, all_ops.cproject.yml and embedded_models.* are checked in here so the
+# project builds standalone (the upstream generators that produce them live in
+# the ExecuTorch tree, not in this snapshot).

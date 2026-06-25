@@ -1,0 +1,5 @@
+CompileFlags:
+  CompilationDatabase: out/all_ops/ARMCM55/Debug
+  Add:
+    - -include
+    - out/all_ops/ARMCM55/Debug/compile_macros.h
