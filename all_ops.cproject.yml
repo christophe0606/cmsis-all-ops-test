@@ -258,6 +258,8 @@ project:
     # AC6: armlink's RW-data decompressor hardfaults at startup; disable RW
     # compression so scatter-load does a plain copy.
     - for-compiler: AC6
+      C: [-ffp-mode=full]
+      CPP: [-ffp-mode=full]
       Link: [--datacompressor=off]
 
   groups:

@@ -6,7 +6,7 @@
 solution:
   created-for: CMSIS-Toolbox@2.13.0
   cdefault:
-  compiler: GCC@14.3.1
+  compiler: CLANG@22.1.0
 
   packs:
     - pack: ARM::CMSIS@>=6.0.0
