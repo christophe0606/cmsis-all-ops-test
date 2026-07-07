@@ -8,6 +8,8 @@ tmp/
 *.cbuild-run.yml
 __pycache__/
 run.sh
+md5.*
+
 
 
 # models/, all_ops.cproject.yml and embedded_models_blob.S / embedded_models.{cpp,h}

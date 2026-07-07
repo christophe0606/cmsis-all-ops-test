@@ -22,8 +22,8 @@ def _get_network_length(filename: Path) -> int:
 
 
 class Container:
-    HEADER_SIZE = 12 # magic + image size + model count
-    NETWORK_DESC_SIZE = 8 # 4 bytes for network size + 4 bytes for network address
+    HEADER_SIZE = 16 # magic + image size + object count + maximum object size
+    NETWORK_DESC_SIZE = 8 # 4 bytes for object size + 4 bytes for object offset
 
     def __init__(self, base_addr: int, output: Path):
         if base_addr % 4 != 0:
@@ -34,9 +34,10 @@ class Container:
         self.file = open(output, "w+b")
         self._offset = 0
         self._total_size = 0
+        self._max_object_size = 0
         # Padding to add before writing a network
         self._network_padding = []
-        self._network_addr = []
+        self._network_offsets = []
         self._network_sizes = []
 
     def __enter__(self):
@@ -71,7 +72,8 @@ class Container:
             self._network_padding.append(bytes([0]*pad))
             network_size = _get_network_length(file)
             self._network_sizes.append(network_size)
-            self._network_addr.append(offset)
+            self._max_object_size = max(self._max_object_size, network_size)
+            self._network_offsets.append(offset - self.base_addr)
             offset += network_size
         self._total_size = offset - self.base_addr
 
@@ -79,16 +81,17 @@ class Container:
         self.write_uint32(MAGIC)
         self.write_uint32(self._total_size)
         self.write_uint32(len(self._network_sizes))
+        self.write_uint32(self._max_object_size)
 
     def write_network_tables(self):
-        for network_size, addr in zip(self._network_sizes, self._network_addr):
+        for network_size, object_offset in zip(self._network_sizes, self._network_offsets):
             self.write_uint32(network_size)
-            self.write_uint32(addr)
+            self.write_uint32(object_offset)
 
     def write_networks(self, filenames: list[Path]):
-        for file, padding, addr in zip(filenames, self._network_padding, self._network_addr):
+        for file, padding, object_offset in zip(filenames, self._network_padding, self._network_offsets):
             self.write_padding(len(padding))
-            expected_offset = addr - self.base_addr
+            expected_offset = object_offset
             if self._offset != expected_offset:
                 raise RuntimeError(
                     f"Internal layout error for {file}: offset {self._offset} != {expected_offset}"
@@ -117,4 +120,3 @@ def generate_container(base_addr: int, filenames: list[Path], output: Path):
 
         md5 = container.compute_md5()
         print(f"md5 hash = {md5}")
-

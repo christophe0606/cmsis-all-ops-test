@@ -17,6 +17,7 @@ typedef struct {
     uint32_t magic;
     uint32_t size;
     uint32_t nb_objects;
+    uint32_t max_object_size;
     const container_object_t objects[];
 } container_header_t;
 
@@ -24,6 +25,7 @@ extern void *get_container();
 extern size_t get_container_length();
 extern const uint8_t * get_object_pointer(int index);
 extern size_t get_object_length(int index);
+extern uint32_t get_max_object_size();
 
 #if defined(__cplusplus)
 }  

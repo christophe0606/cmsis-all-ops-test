@@ -478,11 +478,12 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
    * The log format intentionally includes "Test_result: <op> PASS/FAIL" lines
    * so a host-side parser can aggregate results across a full bare-metal run.
    *
+   * @param pte_data Scratch buffer to copy the embedded .pte from flash/rodata.
    * @param m Embedded model and metadata to execute.
    * @param row Output summary row populated for the final table.
    * @return true when every model output matched its expected tensor.
    */
-  bool run_one_model(const EmbeddedModel &m, RowStat &row)
+  bool run_one_model(uint8_t *pte_data, const EmbeddedModel &m, RowStat &row)
   {
     row.m = &m;
     row.pass = false;
@@ -495,8 +496,9 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
     auto temp_allocator = std::make_unique<ArmMemoryAllocator>(kTempPoolSize,
                                                             g_temp_pool);
 
-    const uint8_t *pte_data = static_cast<const uint8_t *>(get_object_pointer(m.object_index));
+    const uint8_t *container_pte_data = static_cast<const uint8_t *>(get_object_pointer(m.object_index));
     size_t pte_size = get_object_length(m.object_index);
+    std::memcpy(pte_data, container_pte_data, pte_size);
     auto loader = std::make_unique<BufferLoader>(pte_data, pte_size);
     EmbeddedModule module_(pte_data,
                            pte_size,
@@ -644,12 +646,16 @@ int main(void)
   reg32(kDwtCyccnt) = 0;
   reg32(kDwtCtrl) |= 1u;
 
+  uint32_t max_object_size = get_max_object_size();
+  /* Create a buffer to copy the pte file from container */
+  uint8_t *pte_temp_buffer_ptr = static_cast<uint8_t *>(std::aligned_alloc(MODEL_ALIGNMENT, max_object_size));
+
   size_t passed = 0;
   const size_t total = g_embedded_models_count;
   for (size_t mi = 0; mi < total; ++mi)
   {
     RowStat &row = g_rows[mi < kMaxRows ? mi : kMaxRows - 1];
-    if (run_one_model(g_embedded_models[mi], row))
+    if (run_one_model(pte_temp_buffer_ptr,g_embedded_models[mi], row))
     {
       ++passed;
     }
@@ -683,5 +689,6 @@ int main(void)
       "Test_result: SUMMARY %u/%u PASS\n",
       static_cast<unsigned>(passed),
       static_cast<unsigned>(total));
+  free(pte_temp_buffer_ptr);
   exit(passed == total ? 0 : 1);
 }
