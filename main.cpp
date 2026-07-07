@@ -50,6 +50,7 @@
 #include "embedded_models.h"
 #include "arm_embedded_module.hpp"
 #include "arm_memory_allocator.h"
+#include "container.h"
 
 using executorch::aten::Tensor;
 using executorch::runtime::DataLoader;
@@ -494,9 +495,11 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
     auto temp_allocator = std::make_unique<ArmMemoryAllocator>(kTempPoolSize,
                                                             g_temp_pool);
 
-    auto loader = std::make_unique<BufferLoader>(m.pte_data, m.pte_size);
-    EmbeddedModule module_(m.pte_data,
-                           m.pte_size,
+    const uint8_t *pte_data = static_cast<const uint8_t *>(get_object_pointer(m.object_index));
+    size_t pte_size = get_object_length(m.object_index);
+    auto loader = std::make_unique<BufferLoader>(pte_data, pte_size);
+    EmbeddedModule module_(pte_data,
+                           pte_size,
                            std::move(loader),
                            std::move(method_allocator),
                            std::move(temp_allocator));
@@ -524,7 +527,7 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
         "Test_exec: %s (dir=%s) pte=%u bytes, %u input(s), %u expected\n",
         m.op,
         m.dir,
-        static_cast<unsigned>(m.pte_size),
+        static_cast<unsigned>(pte_size),
         static_cast<unsigned>(num_inputs),
         static_cast<unsigned>(num_outputs));
 
@@ -665,11 +668,12 @@ int main(void)
   for (size_t mi = 0; mi < total && mi < kMaxRows; ++mi)
   {
     const RowStat &r = g_rows[mi];
+    size_t pte_size = get_object_length(r.m->object_index);
     printf(
         "%-30s %-6s %10u %8u %8u %12u\n",
         r.m->op,
         r.pass ? "PASS" : "FAIL",
-        static_cast<unsigned>(r.m->pte_size),
+        static_cast<unsigned>(pte_size),
         static_cast<unsigned>(r.in_bytes),
         static_cast<unsigned>(r.out_bytes),
         static_cast<unsigned>(r.cycles));

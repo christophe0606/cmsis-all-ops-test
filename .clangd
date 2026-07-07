@@ -1,5 +1,5 @@
 CompileFlags:
-  CompilationDatabase: c:\Users\chrfav01\benchresults\cmsis-all-ops-test\out\all_ops\ARMCM55\Debug
+  CompilationDatabase: c:\Users\chrfav01\benchresults\cmsis-all-ops-test\out\all_ops\AlifE7\Debug
   Add:
     - -include
-    - c:\Users\chrfav01\benchresults\cmsis-all-ops-test\out\all_ops\ARMCM55\Debug\compile_macros.h
+    - c:\Users\chrfav01\benchresults\cmsis-all-ops-test\out\all_ops\AlifE7\Debug\compile_macros.h

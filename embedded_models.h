@@ -6,8 +6,7 @@
 struct EmbeddedModel {
     const char* op;
     const char* dir;
-    const unsigned char* pte_data;
-    std::size_t pte_size;
+    const int object_index;
 };
 
 extern const EmbeddedModel g_embedded_models[];

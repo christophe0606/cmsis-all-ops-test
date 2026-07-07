@@ -47,7 +47,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/all_ops/ARMCM55/Debug/all_ops.elf",
+            "program": "out/all_ops/AlifE7/Debug/all_ops.elf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",

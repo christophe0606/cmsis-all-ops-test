@@ -277,3 +277,4 @@ project:
         - file: ./stdout_semihosting.c
         - file: ./et_pal_override.cpp
         - file: ./exit_semihosting.c
+        - file: ./container.c
