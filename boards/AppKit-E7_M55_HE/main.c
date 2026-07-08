@@ -26,7 +26,6 @@
 #include "board_config.h"
 #include "ethosu_driver.h"
 #include "ext_init.h"
-#include "main.h"
 
 #include "se_services_port.h"
 
@@ -125,6 +124,9 @@ static void CpuCacheEnable(void)
     SCB_EnableDCache();
 }
 
+extern int app();
+extern int stdio_init(void);
+
 int main(void)
 {
 
@@ -158,5 +160,5 @@ int main(void)
     /* Enable the CPU Cache */
     CpuCacheEnable();
 
-    return app_main();
+    return app();
 }

@@ -8,7 +8,7 @@
  * @brief Bare-metal all-operators ExecuTorch test runner.
  *
  * This executable is built entirely from the CMSIS Pack's ExecuTorch runtime
- * and kernel components.
+ * and kernel components.run_one_model
  *
  * The runner has two purposes:
  * - Build/link coverage: all_ops.cproject.yml selects every operator
@@ -72,10 +72,10 @@ namespace
 {
 
   /** @brief Static arena used by ExecuTorch for method lifetime allocations. */
-  constexpr size_t kMethodPoolSize = 16 * 1024 * 1024;
+  constexpr size_t kMethodPoolSize = 14 * 1024;
 
   /** @brief Static arena used by ExecuTorch for temporary execution memory. */
-  constexpr size_t kTempPoolSize = 4 * 1024 * 1024;
+  constexpr size_t kTempPoolSize = 14 * 1024;
 
   /** @brief Backing storage for the method allocator. */
   alignas(16) uint8_t g_method_pool[kMethodPoolSize];
@@ -125,6 +125,9 @@ namespace
 
     /** @brief DWT cycles spent in the model forward pass. */
     uint32_t cycles;
+
+    /** @brief True if an error occurred during model execution. */
+    bool error_occurred;
   };
 
   /** @brief Maximum number of per-model rows retained for final reporting. */
@@ -467,6 +470,14 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
       std::move(strides));
 }
 
+// To stop processing of tests when an error occured
+// (memory error, error loading a method ...)
+#define RAISE_ERROR               \
+   {                              \
+       row.error_occurred = true; \
+       return false;              \
+   }
+
   /**
    * @brief Runs one embedded model end-to-end and records its result.
    *
@@ -490,6 +501,7 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
     row.in_bytes = 0;
     row.out_bytes = 0;
     row.cycles = 0;
+    row.error_occurred = false;
 
     auto method_allocator = std::make_unique<ArmMemoryAllocator>(kMethodPoolSize,
                                                               g_method_pool);
@@ -514,7 +526,7 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
     size_t num_outputs = 0;
     auto num_outputs_ = module_.execute("nb_outputs");
     if (!num_outputs_.ok())
-      return false;
+      RAISE_ERROR;
 
     num_outputs = num_outputs_.get()[0].toInt();
 
@@ -554,10 +566,12 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
         if (error != Error::Ok)
         {
           printf("  input %u FAIL (set_input)\n", static_cast<unsigned>(i));
-          return false;
+          RAISE_ERROR;
         }
         
       }
+      else
+        RAISE_ERROR;
     }
 
     printf("  [run] %s execute() ...\n", m.op);
@@ -567,7 +581,7 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
     if (!result.ok())
     {
       printf("Test_result: %s FAIL (execute)\n", m.op);
-      return false;
+      RAISE_ERROR;
     }
 
     printf(
@@ -579,13 +593,13 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
     float atol = 0;
     auto atol_ = module_.execute("atol");
     if (!atol_.ok())
-      return false;
+      RAISE_ERROR
     atol = static_cast<float>(atol_.get()[0].toDouble());
 
     float rtol = 0;
     auto rtol_ = module_.execute("rtol");
     if (!rtol_.ok())
-      return false;
+      RAISE_ERROR
     rtol = static_cast<float>(rtol_.get()[0].toDouble());
 
     for (size_t i = 0; i < num_outputs; ++i)
@@ -598,8 +612,7 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
       if (!output_.ok())
       {
         printf("  output %u FAIL (get_output)\n", static_cast<unsigned>(i));
-        pass = false;
-        continue;
+        RAISE_ERROR
       }
      
       const auto expected = output_.get()[0].toTensor();
@@ -637,6 +650,7 @@ extern "C" int app(void);
 int app(void)
 {
   
+  printf("Start tests\n");
   executorch::runtime::runtime_init();
 
   // Enable the DWT cycle counter so run_one_model can time each inference.
@@ -649,6 +663,7 @@ int app(void)
   uint8_t *pte_temp_buffer_ptr = static_cast<uint8_t *>(std::aligned_alloc(MODEL_ALIGNMENT, max_object_size));
 
   size_t passed = 0;
+  bool error_occurred = false;
   const size_t total = g_embedded_models_count;
   for (size_t mi = 0; mi < total; ++mi)
   {
@@ -657,8 +672,21 @@ int app(void)
     {
       ++passed;
     }
+    else
+    {
+      if (row.error_occurred)
+      {
+        printf("Test_result: %s ERROR\n", row.m->op);
+        error_occurred = true;
+        break; // Stop processing further tests on error
+      }
+    }
   }
 
+  if (error_occurred)
+  {
+    return 1; // Stop processing further tests on error
+  }
   printf(
       "\n==== Per-op results (%u models) ====\n", static_cast<unsigned>(total));
   printf(

@@ -105,10 +105,11 @@ namespace arm
 
             uint8_t *buffer = reinterpret_cast<uint8_t *>(
                 memory_allocator_->allocate(buffer_size, 16UL));
-            ET_CHECK_MSG(
-                buffer != nullptr,
-                "Could not allocate memory for memory planned buffer size %d",
-                (int)buffer_size);
+            if (buffer == nullptr)
+            {
+              ET_LOG(Error, "Could not allocate memory for memory planned buffer size %d", (int)buffer_size);
+              return Error::MemoryAllocationFailed;
+            }
 
             method_holder.planned_buffers.push_back(buffer);
             method_holder.planned_spans.push_back({method_holder.planned_buffers.back(), buffer_size});

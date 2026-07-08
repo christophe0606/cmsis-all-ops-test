@@ -15,6 +15,7 @@ solution:
     - pack: ARM::CMSIS@>=6.0.0
     - pack: ARM::CMSIS-NN
     - pack: ARM::CMSIS-Compiler
+    - pack: AlifSemiconductor::Ensemble@2.1.0
     - pack: PyTorch::ExecuTorch@1.3.1-rc9
 
   target-types:
@@ -33,21 +34,22 @@ solution:
             clock: 10000000
             protocol: swd
 
-    - type: AlifE7
-      device: ARM::ARMCM55
+    - type: AE722F80F55D5LS
+      board: AppKit-E7-AIML
+      device: AE722F80F55D5LS
+      variables:
+        - Board-Layer: $SolutionDir()$/boards/AppKit-E7_M55_HE/Board_HE.clayer.yml
       define:
-        - USE_FLASH
         - MODEL_ALIGNMENT: 16
-        - IMAGE_ADDRESS: 0xC0000000
       target-set:
         - set:
           images:
             - project-context: all_ops.Debug
             - image: container.bin
               load: image
-              load-offset: 0xC0000000     # program inactive flash bank (pyOCD only)
+              load-offset: 0xC0000000 # program inactive flash bank (pyOCD only)
           debugger:
-            name: CMSIS-DAP@pyOCD
+            name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
 

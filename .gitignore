@@ -1,5 +1,4 @@
 # csolution / cbuild generated build artifacts
-RTE/
 out/
 tmp/
 *.cbuild-idx.yml

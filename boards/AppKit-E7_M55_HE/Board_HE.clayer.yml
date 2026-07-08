@@ -57,21 +57,13 @@ layer:
   # List components to use for your application.
   # A software component is a re-usable unit that may be configurable.
   components:
-    - component: BSP:External peripherals:CAMERA Sensor MT9M114
-    - component: BSP:External peripherals:ILI9806E LCD panel
-
     - component: CMSIS:CORE
 
     - component: CMSIS Driver:GPIO
       define:
         - CMSIS_GPIO_DISABLE_EVENTS
     - component: CMSIS Driver:I2C
-    - component: CMSIS Driver:SAI
     - component: CMSIS Driver:USART
-    - component: CMSIS Driver:VIO:Board&AppKit-E7-AIML
-    - component: CMSIS Driver:vStream:AudioIn&AppKit-E7-AIML
-    - component: CMSIS Driver:vStream:VideoIn&AppKit-E7-AIML
-    - component: CMSIS Driver:vStream:VideoOut&AppKit-E7-AIML
 
     - component: CMSIS-Compiler:CORE
     - component: CMSIS-Compiler:STDERR:Custom
@@ -81,14 +73,8 @@ layer:
     - component: Device:Startup
     - component: BSP:Board Config
 
-    - component: Device:SOC Peripherals:CDC
-    - component: Device:SOC Peripherals:CPI
-    - component: Device:SOC Peripherals:DMA
     - component: Device:SOC Peripherals:GPIO
     - component: Device:SOC Peripherals:MHU
-    - component: Device:SOC Peripherals:MIPI CSI2
-    - component: Device:SOC Peripherals:MIPI DSI
-    - component: Device:SOC Peripherals:MIPI DSI CSI2 DPHY
     - component: Device:SOC Peripherals:PINCONF
 
     - component: Machine Learning:NPU Support:Ethos-U Driver&Generic U55
@@ -105,7 +91,6 @@ layer:
     - group: Board
       files:
         - file: ./main.c
-        - file: ./main.h
         - file: ./AppKit-E7-AIML.h
         - file: ./retarget_stdio.c
         - file: ./ext_init.c

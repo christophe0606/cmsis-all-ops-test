@@ -262,7 +262,6 @@ project:
         - file: ./arm_embedded_module.cpp
         - file: ./arm_memory_allocator.cpp
         - file: ./embedded_models_blob.S
-          for-context: +ARMCM55
         - file: ./et_pal_override.cpp
         - file: ./container.c
 
