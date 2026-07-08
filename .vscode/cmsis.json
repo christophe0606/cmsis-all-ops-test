@@ -1,7 +1,7 @@
 {
     "targetSet": {
         "all_ops": {
-            "activeTargetType": "AlifE7"
+            "activeTargetType": "ARMCM55"
         }
     }
 }

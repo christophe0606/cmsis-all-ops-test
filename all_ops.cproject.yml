@@ -29,11 +29,6 @@ project:
     - .
 
   components:
-    - component: ARM::CMSIS:CORE
-    - component: ARM::Device:Startup&C Startup
-    - component: ARM::CMSIS-Compiler:CORE
-    - component: ARM::CMSIS-Compiler:STDOUT:Custom
-    - component: ARM::CMSIS-Compiler:STDERR:Custom
     - component: Machine Learning:ExecuTorch:Runtime
     - component: Machine Learning:ExecuTorch:Kernel Utils
     - component: Machine Learning:ExecuTorch:Kernel Registration
@@ -236,13 +231,6 @@ project:
     - component: Machine Learning:ExecuTorch Operators:Cortex-M softmax
     - component: Machine Learning:ExecuTorch Operators:Cortex-M transpose
 
-  linker:
-    - script: ./ARMCM55_large.ld
-      for-compiler: GCC
-    - script: ./ARMCM55_large.ld
-      for-compiler: CLANG
-    - script: ./ARMCM55_large.sct
-      for-compiler: AC6
 
   misc:
     # AtFE/CLANG: force hard-float and -include the random_device shim so the RNG
@@ -266,7 +254,7 @@ project:
   groups:
     - group: App
       files:
-        - file: ./main.cpp
+        - file: ./app.cpp
         # Per-op test models embedded into .rodata (.incbin) by
         # gen_embedded_models.py. A stub (0 models) is emitted when the model
         # export step has not run, so build/link coverage works without torch.
@@ -274,7 +262,10 @@ project:
         - file: ./arm_embedded_module.cpp
         - file: ./arm_memory_allocator.cpp
         - file: ./embedded_models_blob.S
-        - file: ./stdout_semihosting.c
+          for-context: +ARMCM55
         - file: ./et_pal_override.cpp
-        - file: ./exit_semihosting.c
         - file: ./container.c
+
+  layers:
+    - layer: $Board-Layer$
+      type: Board

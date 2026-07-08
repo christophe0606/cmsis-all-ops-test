@@ -625,6 +625,8 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
 
 } // namespace
 
+extern "C" int app(void);
+
 /**
  * @brief Program entry point for the all-operators test image.
  *
@@ -632,13 +634,9 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
  * embedded model in sequence, and prints both per-operator and aggregate test
  * results. A zero return value means every embedded model passed.
  */
-int main(void)
+int app(void)
 {
-  // Unbuffered stdout: the bare-metal startup may loop after main() returns
-  // (never calling exit()), so block-buffered output would never flush. Make
-  // every printf reach the semihosting console immediately.
-  setvbuf(stdout, nullptr, _IONBF, 0);
-
+  
   executorch::runtime::runtime_init();
 
   // Enable the DWT cycle counter so run_one_model can time each inference.
@@ -690,5 +688,5 @@ int main(void)
       static_cast<unsigned>(passed),
       static_cast<unsigned>(total));
   free(pte_temp_buffer_ptr);
-  exit(passed == total ? 0 : 1);
+  return(passed == total ? 0 : 1);
 }

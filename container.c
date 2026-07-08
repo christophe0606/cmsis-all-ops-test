@@ -5,7 +5,11 @@ _Static_assert(sizeof(container_header_t) == 16, "Flash container header layout 
 
 #define EXPECTED_MAGIC 0xBEEFDEADu
 
+#if !defined(USE_FLASH)
 extern const unsigned char _container_address_start[];
+#else
+const unsigned char *_container_address_start = (const unsigned char *)IMAGE_ADDRESS;
+#endif
 
 static int has_valid_container_header(void)
 {

@@ -1,0 +1,40 @@
+layer:
+  type: Board
+  description: Board setup for M55
+  for-device: ARM::ARMCM55
+
+
+  connections:
+    - connect: M55
+
+  define:
+    - CORSTONE300_FVP
+    - ARM_MODEL_USE_PMU_COUNTERS
+
+  packs:
+    - pack: ARM::CMSIS@>=6.0.0
+    - pack: ARM::Cortex_DFP@>=1.1.0
+    - pack: ARM::CMSIS-Compiler
+
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: ARM::Device:Startup&C Startup
+    - component: ARM::CMSIS-Compiler:CORE
+    - component: ARM::CMSIS-Compiler:STDOUT:Custom
+    - component: ARM::CMSIS-Compiler:STDERR:Custom
+
+
+  groups:
+    - group: Board
+      files:
+        - file: ./main.c
+        - file: ./exit_semihosting.c
+        - file: ./stdout_semihosting.c
+      
+  linker:
+    - script: ./ARMCM55_large.ld
+      for-compiler: GCC
+    - script: ./ARMCM55_large.ld
+      for-compiler: CLANG
+    - script: ./ARMCM55_large.sct
+      for-compiler: AC6
