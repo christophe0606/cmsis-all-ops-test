@@ -15,25 +15,17 @@
  */
 #define CMSIS_device_header "alif.h"
 
-/* ARM::CMSIS-Compiler:STDERR:Custom@1.1.0 */
-#define RTE_CMSIS_Compiler_STDERR                /* CMSIS-Compiler STDERR */
-#define RTE_CMSIS_Compiler_STDERR_Custom         /* CMSIS-Compiler STDERR: Custom */
-/* ARM::CMSIS-Compiler:STDIN:Custom@1.1.0 */
-#define RTE_CMSIS_Compiler_STDIN                 /* CMSIS-Compiler STDIN */
-#define RTE_CMSIS_Compiler_STDIN_Custom          /* CMSIS-Compiler STDIN: Custom */
 /* ARM::CMSIS-Compiler:STDOUT:Custom@1.1.0 */
 #define RTE_CMSIS_Compiler_STDOUT                /* CMSIS-Compiler STDOUT */
 #define RTE_CMSIS_Compiler_STDOUT_Custom         /* CMSIS-Compiler STDOUT: Custom */
-/* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U55@1.25.2 */
-#define RTE_ETHOS_U_CORE_DRIVER
+/* AlifSemiconductor::BSP:OSPI FLASH XIP:core@2.1.0 */
+#define RTE_Drivers_ISSI_FLASH_XIP_CORE              /* OSPI XIP CORE */
 /* AlifSemiconductor::CMSIS Driver:GPIO@1.0.0 */
 #define RTE_Drivers_GPIO   1           /* Driver GPIO */
-/* AlifSemiconductor::CMSIS Driver:I2C@2.1.0 */
-#define RTE_Drivers_I2C              /* Driver I2C */
 /* AlifSemiconductor::CMSIS Driver:USART@2.1.0 */
 #define RTE_Drivers_USART               /* Driver UART  */
-/* AlifSemiconductor::Device:SOC Peripherals:GPIO@2.1.0 */
-#define RTE_Drivers_IO              /* Driver GPIO */
+/* AlifSemiconductor::Device:SOC Peripherals:OSPI@2.1.0 */
+#define RTE_Drivers_OSPI              /* Driver OSPI */
 /* AlifSemiconductor::Device:SOC Peripherals:PINCONF@2.1.0 */
 #define RTE_Drivers_LL_PINCONF              /* Driver PinPAD and PinMux */
 /* PyTorch::Machine Learning:ExecuTorch Operators:Cortex-M dequantize_per_tensor@1.3.1-rc9 */

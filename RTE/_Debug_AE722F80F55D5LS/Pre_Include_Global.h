@@ -9,9 +9,6 @@
 #ifndef PRE_INCLUDE_GLOBAL_H
 #define PRE_INCLUDE_GLOBAL_H
 
-/* ARM::Machine Learning:NPU Support:Ethos-U Driver&Generic U55@1.25.2 */
-// enabling global pre includes 
-        #define ETHOSU_ARCH u55
 /* PyTorch::Machine Learning:ExecuTorch:Runtime@1.3.1-rc9 */
 /* ExecuTorch global configuration */
         #define C10_USING_CUSTOM_GENERATED_MACROS

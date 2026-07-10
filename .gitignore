@@ -8,6 +8,7 @@ tmp/
 __pycache__/
 run.sh
 md5.*
+flash.bin
 
 
 

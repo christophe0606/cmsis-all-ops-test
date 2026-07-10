@@ -774,7 +774,7 @@
                                     ]
                                 },
                                 {
-                                    "id": "CLKCTL",
+                                    "id": "CLKCTL_SYS",
                                     "type": "PE2",
                                     "num_masters": 4,
                                     "instances": [
@@ -794,7 +794,14 @@
                                             },
                                             "irq_data": null,
                                             "dma_data": null
-                                        },
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "CLKCTL_PER",
+                                    "type": "PE2",
+                                    "num_masters": 4,
+                                    "instances": [
                                         {
                                             "id": "CLKCTL_PER_MST",
                                             "fc_id": 11,
@@ -2544,6 +2551,30 @@
                                             "rgn_indx": null,
                                             "start_address": "0x00000000",
                                             "size": 4096,
+                                            "desc": "",
+                                            "spare_flag": "",
+                                            "configurables": {
+                                                "masters": [],
+                                                "irqs": [],
+                                                "dmas": []
+                                            },
+                                            "irq_data": null,
+                                            "dma_data": null
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "SEUART",
+                                    "type": "PE2",
+                                    "num_masters": 4,
+                                    "instances": [
+                                        {
+                                            "id": "SEUART",
+                                            "fc_id": 0,
+                                            "fc_name": "",
+                                            "rgn_indx": null,
+                                            "start_address": "0x00000000",
+                                            "size": 0,
                                             "desc": "",
                                             "spare_flag": "",
                                             "configurables": {
@@ -7637,52 +7668,6 @@
                                     ]
                                 },
                                 {
-                                    "id": "LPCPI",
-                                    "type": "PE2",
-                                    "num_masters": 4,
-                                    "instances": [
-                                        {
-                                            "id": "LPCPI",
-                                            "fc_id": 11,
-                                            "fc_name": "EXPMST0",
-                                            "rgn_indx": null,
-                                            "start_address": "0x43003000",
-                                            "size": 4096,
-                                            "desc": "",
-                                            "spare_flag": "",
-                                            "configurables": {
-                                                "masters": [],
-                                                "irqs": [],
-                                                "dmas": []
-                                            },
-                                            "irq_data": {
-                                                "M55HE": [
-                                                    [
-                                                        "M55HE_IRQS[54]",
-                                                        "54",
-                                                        "LPCAM_IRQ",
-                                                        "Edge"
-                                                    ]
-                                                ]
-                                            },
-                                            "dma_data": {
-                                                "DMA2": [
-                                                    [
-                                                        "LPCAM_VSYNC_DMA_REQ",
-                                                        "DMA2_REQ_16",
-                                                        "LPCPI VSYNC DMA request"
-                                                    ],
-                                                    [
-                                                        "LPCAM_HSYNC_DMA_REQ",
-                                                        "DMA2_REQ_17",
-                                                        "LPCPI HSYNC DMA request"
-                                                    ]
-                                                ]
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
                                     "id": "M55HE_CFG",
                                     "type": "PE2",
                                     "num_masters": 4,
@@ -7853,9 +7838,56 @@
                             ]
                         },
                         {
-                            "category": "Multimedia and Graphics",
+                            "category": "Graphics and Imaging",
                             "lp": false,
                             "modules": [
+                                {
+                                    "id": "LPCPI",
+                                    "type": "PE2",
+                                    "num_masters": 4,
+                                    "lp": true,
+                                    "instances": [
+                                        {
+                                            "id": "LPCPI",
+                                            "fc_id": 11,
+                                            "fc_name": "EXPMST0",
+                                            "rgn_indx": null,
+                                            "start_address": "0x43003000",
+                                            "size": 4096,
+                                            "desc": "",
+                                            "spare_flag": "",
+                                            "configurables": {
+                                                "masters": [],
+                                                "irqs": [],
+                                                "dmas": []
+                                            },
+                                            "irq_data": {
+                                                "M55HE": [
+                                                    [
+                                                        "M55HE_IRQS[54]",
+                                                        "54",
+                                                        "LPCAM_IRQ",
+                                                        "Edge"
+                                                    ]
+                                                ]
+                                            },
+                                            "dma_data": {
+                                                "DMA2": [
+                                                    [
+                                                        "LPCAM_VSYNC_DMA_REQ",
+                                                        "DMA2_REQ_16",
+                                                        "LPCPI VSYNC DMA request"
+                                                    ],
+                                                    [
+                                                        "LPCAM_HSYNC_DMA_REQ",
+                                                        "DMA2_REQ_17",
+                                                        "LPCPI HSYNC DMA request"
+                                                    ]
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
                                 {
                                     "id": "DSI",
                                     "type": "PE2",
@@ -14859,7 +14891,7 @@
                                     "num_masters": 4,
                                     "instances": [
                                         {
-                                            "id": "Backup_SRAM",
+                                            "id": "Utility_SRAM",
                                             "fc_id": 12,
                                             "fc_name": "EXPMST1",
                                             "start_address": "0x4902C000",
@@ -15129,7 +15161,7 @@
             "pins": {
                 "interfaces": {
                     "configurables": {
-                        "moduleSelected": "LPCPI",
+                        "moduleSelected": "System",
                         "flexIOVolts1V8": true
                     },
                     "modules": [
@@ -15280,7 +15312,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ]
                                                 ]
                                             }
@@ -15939,7 +15971,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ]
                                                 ]
                                             }
@@ -18115,7 +18147,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ]
                                                 ]
                                             }
@@ -18278,14 +18310,10 @@
                                     "id": "CPI",
                                     "startUseCase": "all_pins",
                                     "configurables": {
-                                        "enabled": true,
+                                        "enabled": false,
                                         "pinSet": 0,
-                                        "useCase": "custom",
-                                        "label": null,
-                                        "flags": [
-                                            "WARNING",
-                                            "No processor assigned. \nConfigure a master processor from the 'Resources' tab."
-                                        ]
+                                        "useCase": "all_pins",
+                                        "label": null
                                     },
                                     "signals": [
                                         {
@@ -19084,7 +19112,7 @@
                                                 "7"
                                             ],
                                             "configurables": {
-                                                "enabled": true,
+                                                "enabled": false,
                                                 "display": 0,
                                                 "ren": false,
                                                 "smt": false,
@@ -19098,8 +19126,8 @@
                                                 "irqTrigger": null,
                                                 "flags": [
                                                     [
-                                                        null,
-                                                        null
+                                                        "INFO",
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ],
                                                     [
                                                         "INFO",
@@ -20403,7 +20431,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ]
                                                 ]
                                             }
@@ -24633,7 +24661,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ],
                                                     [
                                                         null,
@@ -26194,6 +26222,40 @@
                                                     ]
                                                 ]
                                             }
+                                        },
+                                        {
+                                            "id": "NSRST",
+                                            "description": "JTAG reset (system reset) active low",
+                                            "pinSets": [
+                                                null
+                                            ],
+                                            "type": "I",
+                                            "pins": [
+                                                "J12"
+                                            ],
+                                            "muxmodes": [
+                                                "0"
+                                            ],
+                                            "configurables": {
+                                                "enabled": true,
+                                                "display": 0,
+                                                "ren": true,
+                                                "smt": true,
+                                                "sr": false,
+                                                "p": 0,
+                                                "e": 1,
+                                                "drv": false,
+                                                "label": null,
+                                                "dbc": null,
+                                                "dir": null,
+                                                "irqTrigger": null,
+                                                "flags": [
+                                                    [
+                                                        null,
+                                                        null
+                                                    ]
+                                                ]
+                                            }
                                         }
                                     ],
                                     "useCases": [
@@ -26202,7 +26264,7 @@
                                             "id": "jtag",
                                             "signals": [
                                                 {
-                                                    "id": "JTAG_NSRST"
+                                                    "id": "NSRST"
                                                 },
                                                 {
                                                     "id": "JTAG_TCK"
@@ -26508,7 +26570,7 @@
                                     "configurables": {
                                         "enabled": true,
                                         "pinSet": 0,
-                                        "useCase": "no_pins",
+                                        "useCase": "custom",
                                         "label": null,
                                         "flags": [
                                             null,
@@ -27064,7 +27126,7 @@
                                                 "5"
                                             ],
                                             "configurables": {
-                                                "enabled": false,
+                                                "enabled": true,
                                                 "display": 1,
                                                 "ren": false,
                                                 "smt": false,
@@ -27082,8 +27144,8 @@
                                                         "This pin has already been assigned to OSPI1_D6_C"
                                                     ],
                                                     [
-                                                        "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        null,
+                                                        null
                                                     ],
                                                     [
                                                         null,
@@ -27142,7 +27204,7 @@
                                                 "label": null,
                                                 "dbc": true,
                                                 "dir": 0,
-                                                "irqTrigger": 5,
+                                                "irqTrigger": 4,
                                                 "flags": [
                                                     [
                                                         null,
@@ -27176,7 +27238,7 @@
                                                 "label": null,
                                                 "dbc": true,
                                                 "dir": 0,
-                                                "irqTrigger": 5,
+                                                "irqTrigger": 4,
                                                 "flags": [
                                                     [
                                                         null,
@@ -27244,7 +27306,7 @@
                                                 "label": null,
                                                 "dbc": true,
                                                 "dir": 0,
-                                                "irqTrigger": 5,
+                                                "irqTrigger": 4,
                                                 "flags": [
                                                     [
                                                         null,
@@ -27278,7 +27340,7 @@
                                                 "label": null,
                                                 "dbc": true,
                                                 "dir": 0,
-                                                "irqTrigger": 5,
+                                                "irqTrigger": 4,
                                                 "flags": [
                                                     [
                                                         null,
@@ -29017,7 +29079,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ],
                                                     [
                                                         null,
@@ -33904,7 +33966,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ],
                                                     [
                                                         "INFO",
@@ -35782,7 +35844,7 @@
                                                 "flags": [
                                                     [
                                                         "INFO",
-                                                        "This pin has already been assigned to CAM_XVCLK_A"
+                                                        "This pin has already been assigned to LPCAM_XVCLK_B"
                                                     ],
                                                     [
                                                         null,
@@ -37221,8 +37283,7 @@
                                 null,
                                 null,
                                 null,
-                                null,
-                                "CAM_XVCLK_A"
+                                "LPCAM_XVCLK_B"
                             ],
                             "anaRequests": 0
                         },
@@ -42328,7 +42389,7 @@
                         "defaultVal": 100,
                         "value": 100,
                         "unit": "MHz",
-                        "associatedModules": "APB buses, LPTIMER[0-3] (PCLK), WDT_HP (PCLK), WDT_HE (PCLK), LPRTC (PCLK), GPIO[0-14] (PCLK, PCLK_INTR), LPGPIO (PCLK, PCLK_INTR), CANFD (CANFD_HOST_CLK, CANFD_TIMER_CLK), I2C[0-3] (PCLK, IC_CLK), LPI2C (PCLK, IC_CLK), I2S[0-3] (PCLK), LPI2S (PCLK), I3C (PCLK, CORE_CLK, DMA_CLK), PDM (PCLK), LPPDM (PCLK), UART[0-7] (PCLK, SCLK), LPUART (PCLK), USB2PHY (USB2_APB_PCLK), CPI (PCLK), LPCPI (PCLK), CSI (PCLK), CDC (PCLK), DSI (PCLK), ADC12[0-2] (PCLK), ADC24 (PCLK), DAC12[0-1] (PCLK), CMP[0-3] (PCLK), CMP Common (PCLK), HWSEM[0-15] (PCLK), LPGPIO_CTRL, M55HE_CFG, CLKCTL_PER_SLV, CAN-CNT, CLKCTL_PER_MST, Backup_SRAM"
+                        "associatedModules": "APB buses, LPTIMER[0-3] (PCLK), WDT_HP (PCLK), WDT_HE (PCLK), LPRTC (PCLK), GPIO[0-14] (PCLK, PCLK_INTR), LPGPIO (PCLK, PCLK_INTR), CANFD (CANFD_HOST_CLK, CANFD_TIMER_CLK), I2C[0-3] (PCLK, IC_CLK), LPI2C (PCLK, IC_CLK), I2S[0-3] (PCLK), LPI2S (PCLK), I3C (PCLK, CORE_CLK, DMA_CLK), PDM (PCLK), LPPDM (PCLK), UART[0-7] (PCLK, SCLK), LPUART (PCLK), USB2PHY (USB2_APB_PCLK), CPI (PCLK), LPCPI (PCLK), CSI (PCLK), CDC (PCLK), DSI (PCLK), ADC12[0-2] (PCLK), ADC24 (PCLK), DAC12[0-1] (PCLK), CMP[0-3] (PCLK), CMP Common (PCLK), HWSEM[0-15] (PCLK), LPGPIO_CTRL, M55HE_CFG, CLKCTL_PER_SLV, CAN-CNT, CLKCTL_PER_MST, Utility_SRAM"
                     },
                     "RTSS_HE_CLK": {
                         "defaultVal": 160,
@@ -70660,7 +70721,7 @@
                 ],
                 "memories": [
                     {
-                        "id": "Backup_SRAM",
+                        "id": "Utility_SRAM",
                         "retainable": true,
                         "pd": "PD0",
                         "maxRetainedSize": 4096,
@@ -76612,11 +76673,9 @@
                 },
                 "pinsTree0000": {
                     "configurables": {
-                        "openNodeIds": [
-                            "Low Power Peripherals"
-                        ],
+                        "openNodeIds": [],
                         "selectedNodeIds": [
-                            "LPCPI"
+                            "System"
                         ]
                     }
                 },

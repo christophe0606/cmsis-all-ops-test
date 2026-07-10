@@ -240,20 +240,48 @@ project:
     # (__ARM_FEATURE_MVE 3 -> 1); the Cortex-M Helium ops still need the op-guard
     # patch (FP bit) and/or the toolbox -mfpu fix. See REPORT.md.
     - for-compiler: CLANG
-      C: [-mcpu=cortex-m55, -mfloat-abi=hard]
-      CPP: [-mcpu=cortex-m55, -mfloat-abi=hard, -include, random_device_shim.h]
-      ASM: [-mcpu=cortex-m55, -mfloat-abi=hard]
-      Link: [-mcpu=cortex-m55, -mfloat-abi=hard]
+      C: 
+        - -ffunction-sections
+        - -std=c11 
+      CPP: 
+        - -ffunction-sections
+        - -fno-rtti
+        - -std=c++17
+        - -fno-exceptions
+      Link: 
+        - -Wl,--gc-sections
     # AC6: armlink's RW-data decompressor hardfaults at startup; disable RW
     # compression so scatter-load does a plain copy.
     - for-compiler: AC6
-      C: [-ffp-mode=full]
-      CPP: [-ffp-mode=full]
-      Link: [--datacompressor=off]
+      C: 
+       - -ffp-mode=full
+       - -ffunction-sections
+       - -std=c11 
+      CPP: 
+       - -ffp-mode=full
+       - -ffunction-sections
+       - -fno-rtti
+       - -std=c++17
+       - -fno-exceptions
+      Link:  
+       - --datacompressor=off
+    - for-compiler: GCC
+      C: 
+       - -ffunction-sections
+       - -std=c11 
+      CPP: 
+       - -ffunction-sections
+       - -fno-rtti
+       - -std=c++17
+       - -fno-exceptions
+      Link: 
+        - -Wl,--gc-sections
 
   groups:
     - group: App
       files:
+        - file: ./random_device_shim.h
+          for-compiler: CLANG
         - file: ./app.cpp
         # Per-op test models embedded into .rodata (.incbin) by
         # gen_embedded_models.py. A stub (0 models) is emitted when the model

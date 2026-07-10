@@ -5,9 +5,9 @@
 
 solution:
   created-for: CMSIS-Toolbox@2.14.0
-  cdefault:
-  compiler: CLANG@22.1.0
-  #compiler: AC6@6.24.0
+  cdefault: #compiler: CLANG@22.1.0
+
+  compiler: AC6@6.24.0
   #compiler: GCC@14.3.1
 
   packs:
@@ -37,6 +37,11 @@ solution:
     - type: AE722F80F55D5LS
       board: AppKit-E7-AIML
       device: AE722F80F55D5LS
+      memory:
+        - name: OSPI1
+          access: rwx
+          start: 0xC0000000
+          size: 0x04000000
       variables:
         - Board-Layer: $SolutionDir()$/boards/AppKit-E7_M55_HE/Board_HE.clayer.yml
       define:
@@ -45,13 +50,16 @@ solution:
         - set:
           images:
             - project-context: all_ops.Debug
-            - image: container.bin
-              load: image
-              load-offset: 0xC0000000 # program inactive flash bank (pyOCD only)
+            #- image: flash.bin
+            #  type: bin
+            #  load: image
+            #  load-offset: 0xC0000000 # APP_OSPI_FLASH_HE_BASE / OSPI1 base (pyOCD only)
+            #  device: :M55_HE
           debugger:
             name: ULINKplus@pyOCD
             clock: 10000000
             protocol: swd
+            port: 3333
 
   build-types:
     - type: Debug

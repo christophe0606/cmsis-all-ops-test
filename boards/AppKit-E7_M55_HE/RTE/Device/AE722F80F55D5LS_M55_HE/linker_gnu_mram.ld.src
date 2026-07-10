@@ -50,6 +50,7 @@ MEMORY
   SRAM1 (rwx) : ORIGIN = APP_SRAM1_BASE, LENGTH = APP_SRAM1_SIZE
   #endif
   MRAM  (rx)  : ORIGIN = __ROM_BASE, LENGTH = __ROM_SIZE
+  EXTFLASH (rx) : ORIGIN = APP_OSPI_FLASH_HE_BASE, LENGTH = APP_OSPI_FLASH_HE_SIZE + APP_OSPI_FLASH_HP_SIZE
 }
 
 ENTRY(Reset_Handler)
@@ -142,9 +143,47 @@ SECTIONS
     . = ALIGN(16);
   } > MRAM
 
+  .flash APP_OSPI_FLASH_HE_BASE : ALIGN(16)
+  {
+    __flash_start__ = .;
+
+    . = ALIGN(16);
+    __embedded_models_blob_start__ = .;
+    KEEP(*embedded_models_blob*(.rodata.embedded_models .rodata.embedded_models.*))
+    __embedded_models_blob_end__ = .;
+
+    . = ALIGN(16);
+    __executorch_operators_start__ = .;
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*(.rodata .rodata.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Extension_Tensor*(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Extension_Tensor*(.rodata .rodata.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Registration*(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Registration*(.rodata .rodata.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Operators_Cortex-M*(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Operators_Cortex-M*(.rodata .rodata.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Operators_Quantized*(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Operators_Quantized*(.rodata .rodata.* .gnu.linkonce.r.*)
+
+    *(__lcxx_override*)
+
+    . = ALIGN(16);
+    *PyTorch_Machine_Learning_ExecuTorch_Operators_Portable*(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Operators_Portable*(.rodata .rodata.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Utils*(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Utils*(.rodata .rodata.* .gnu.linkonce.r.*)
+
+    *ARM_CMSIS_NN_Lib*(.text .text.* .gnu.linkonce.t.*)
+    *ARM_CMSIS_NN_Lib*(.rodata .rodata.* .gnu.linkonce.r.*)
+    __executorch_operators_end__ = .;
+
+    . = ALIGN(16);
+    __flash_end__ = .;
+  } > EXTFLASH
+
   .code.at_itcm : ALIGN(8)
   {
-    *(.text*)
+    *(EXCLUDE_FILE(*PyTorch_Machine_Learning_ExecuTorch* *ARM_CMSIS_NN_Lib*) .text*)
     . = ALIGN(16);
   } > ITCM AT > MRAM
 
@@ -265,11 +304,13 @@ SECTIONS
     *(SORT(.dtors.*))
     *(.dtors)
 
-    *(.rodata*)
+    *(EXCLUDE_FILE(*embedded_models_blob* *PyTorch_Machine_Learning_ExecuTorch* *ARM_CMSIS_NN_Lib*) .rodata*)
 
     KEEP(*(.eh_frame*))
     . = ALIGN(16);
   } > MRAM
+
+  ASSERT(__flash_end__ <= ORIGIN(EXTFLASH) + LENGTH(EXTFLASH), "region EXTFLASH overflowed")
 
   /* Check if data + heap + stack exceeds RAM limit */
   ASSERT(__StackLimit >= __HeapLimit, "region RAM overflowed with stack")

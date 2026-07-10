@@ -57,46 +57,32 @@ layer:
   # List components to use for your application.
   # A software component is a re-usable unit that may be configurable.
   components:
-    - component: CMSIS:CORE
-
-    - component: CMSIS Driver:GPIO
-      define:
-        - CMSIS_GPIO_DISABLE_EVENTS
-    - component: CMSIS Driver:I2C
-    - component: CMSIS Driver:USART
-
-    - component: CMSIS-Compiler:CORE
-    - component: CMSIS-Compiler:STDERR:Custom
-    - component: CMSIS-Compiler:STDIN:Custom
-    - component: CMSIS-Compiler:STDOUT:Custom
-
     - component: Device:Startup
-    - component: BSP:Board Config
-
-    - component: Device:SOC Peripherals:GPIO
-    - component: Device:SOC Peripherals:MHU
     - component: Device:SOC Peripherals:PINCONF
+    - component: Device:SOC Peripherals:MHU
 
-    - component: Machine Learning:NPU Support:Ethos-U Driver&Generic U55
+    - component: Services:Retarget IO:STDOUT
 
     - component: Services:Secure Enclave:core&Source
     - component: Services:Secure Enclave:Initialization Helper&Source
 
-    - component: Services:Retarget IO:STDERR
-    - component: Services:Retarget IO:STDIN
-    - component: Services:Retarget IO:STDOUT
+    - component: BSP:Board Config
+
+    - component: Device:SOC Peripherals:OSPI
+    - component: BSP:OSPI FLASH XIP:core
+
+    - component: CMSIS:CORE
+
+    - component: CMSIS-Compiler:CORE
+    - component: CMSIS-Compiler:STDOUT:Custom
+
+    - component: CMSIS Driver:GPIO
+    - component: CMSIS Driver:USART
 
   # List of source groups and files added to a project or a layer.
   groups:
     - group: Board
       files:
         - file: ./main.c
-        - file: ./AppKit-E7-AIML.h
-        - file: ./retarget_stdio.c
-        - file: ./ext_init.c
-        - file: ./ext_init.h
-
-    - group: Ethos Interface
-      files:
-        - file: ./ethosu_cb_dcache.c
-        - file: ./ethosu_cb_os_rtos2.c
+       
+    

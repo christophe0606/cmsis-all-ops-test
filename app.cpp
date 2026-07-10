@@ -470,6 +470,37 @@ TensorPtr to_channels_last_4d_float(const Tensor& in) {
       std::move(strides));
 }
 
+/* 
+
+Amr Compiler 6 embedded C++ library does not provide aligned_alloc
+
+*/
+
+struct AlignedBuffer {
+  void* raw = nullptr;
+  uint8_t* aligned = nullptr;
+
+  AlignedBuffer(size_t size, size_t alignment) {
+    raw = std::malloc(size + alignment - 1);
+    if (!raw) {
+      return;
+    }
+
+    uintptr_t addr = reinterpret_cast<uintptr_t>(raw);
+    uintptr_t aligned_addr = (addr + alignment - 1) & ~(alignment - 1);
+
+    aligned = reinterpret_cast<uint8_t*>(aligned_addr);
+  }
+
+  ~AlignedBuffer() {
+    std::free(raw);
+  }
+
+  uint8_t* get() const {
+    return aligned;
+  }
+};
+
 // To stop processing of tests when an error occured
 // (memory error, error loading a method ...)
 #define RAISE_ERROR               \
@@ -650,7 +681,9 @@ extern "C" int app(void);
 int app(void)
 {
   
-  printf("Start tests\n");
+  printf("Test with splitting of elf\n");
+  for(;;)
+  {}
   executorch::runtime::runtime_init();
 
   // Enable the DWT cycle counter so run_one_model can time each inference.
@@ -660,7 +693,8 @@ int app(void)
 
   uint32_t max_object_size = get_max_object_size();
   /* Create a buffer to copy the pte file from container */
-  uint8_t *pte_temp_buffer_ptr = static_cast<uint8_t *>(std::aligned_alloc(MODEL_ALIGNMENT, max_object_size));
+  AlignedBuffer pte_temp_buffer(max_object_size, MODEL_ALIGNMENT);
+  uint8_t *pte_temp_buffer_ptr = pte_temp_buffer.get();
 
   size_t passed = 0;
   bool error_occurred = false;
