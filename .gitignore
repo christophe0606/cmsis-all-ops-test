@@ -5,6 +5,7 @@ tmp/
 *.cbuild-pack.yml
 *.cbuild-set.yml
 *.cbuild-run.yml
+!flash.cbuild-run.yml
 __pycache__/
 run.sh
 md5.*

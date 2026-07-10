@@ -36,6 +36,7 @@ static void CpuCacheEnable(void)
 
 extern int app();
 extern int stdout_init(void);
+extern int init_ospi_flash(void);
 
 int main(void)
 {
@@ -46,7 +47,8 @@ int main(void)
     /* Initialize STDOUT */
     stdout_init();
 
-
+    init_ospi_flash();
+    
     /* Enable the CPU Cache */
     CpuCacheEnable();
 

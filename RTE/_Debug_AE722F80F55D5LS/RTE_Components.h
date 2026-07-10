@@ -24,6 +24,8 @@
 #define RTE_Drivers_GPIO   1           /* Driver GPIO */
 /* AlifSemiconductor::CMSIS Driver:USART@2.1.0 */
 #define RTE_Drivers_USART               /* Driver UART  */
+/* AlifSemiconductor::Device:SOC Peripherals:GPIO@2.1.0 */
+#define RTE_Drivers_IO              /* Driver GPIO */
 /* AlifSemiconductor::Device:SOC Peripherals:OSPI@2.1.0 */
 #define RTE_Drivers_OSPI              /* Driver OSPI */
 /* AlifSemiconductor::Device:SOC Peripherals:PINCONF@2.1.0 */

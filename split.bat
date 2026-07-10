@@ -1,0 +1,1 @@
+uv run split_flash_images.py --elf out\all_ops\AE722F80F55D5LS\Debug\all_ops.axf --flash-bin flash.bin

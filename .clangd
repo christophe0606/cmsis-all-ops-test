@@ -1,3 +1,5 @@
 CompileFlags:
   CompilationDatabase: c:\Users\chrfav01\benchresults\cmsis-all-ops-test\out\all_ops\AE722F80F55D5LS\Debug
-  Add: []
+  Add:
+    - -include
+    - c:\Users\chrfav01\benchresults\cmsis-all-ops-test\out\all_ops\AE722F80F55D5LS\Debug\compile_macros.h

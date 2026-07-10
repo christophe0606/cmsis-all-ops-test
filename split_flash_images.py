@@ -19,6 +19,8 @@ FLASH_SECTION_NAMES = (".flash", "ER_EXTFLASH", ".flash_he", ".flash_hp")
 TOOLCHAIN_ROOT_RE = re.compile(r'REGISTERED_TOOLCHAIN_ROOT\s+"([^"]+)"')
 PT_NULL = 0
 PT_LOAD = 1
+SHF_WRITE = 0x1
+SHF_ALLOC = 0x2
 
 
 def objcopy_names() -> tuple[str, ...]:
@@ -226,10 +228,96 @@ def write_flash_bin_from_reference_elf(objcopy: str, reference_elf: Path, flash_
             except RuntimeError as error:
                 errors.append(str(error))
 
+    manual_section = write_flash_bin_from_elf_section(reference_elf, flash_bin)
+    if manual_section:
+        return manual_section
+
     raise RuntimeError(
         f"{reference_elf} does not contain a supported external-flash section "
         f"({flash_section_list()}). Last objcopy error: {errors[-1] if errors else 'none'}"
     )
+
+
+def write_flash_bin_from_elf_section(reference_elf: Path, flash_bin: Path) -> str | None:
+    """Dump the external-flash section directly from the ELF section table.
+
+    This fallback is intentionally independent of program headers. It lets the
+    script overwrite flash.bin even if a previous split already converted the
+    external PT_LOAD to PT_NULL but left the section payload in the AXF.
+    """
+    data = reference_elf.read_bytes()
+    if len(data) < 0x34 or data[:4] != b"\x7fELF":
+        raise RuntimeError(f"{reference_elf} is not an ELF file.")
+
+    elf_class = data[4]
+    endian = "<" if data[5] == 1 else ">"
+
+    if elf_class == 1:
+        ehdr_fmt = endian + "HHIIIIIHHHHHH"
+        shdr_fmt = endian + "IIIIIIIIII"
+        sh_name_index = 0
+        sh_offset_index = 4
+        sh_size_index = 5
+    elif elf_class == 2:
+        ehdr_fmt = endian + "HHIQQQIHHHHHH"
+        shdr_fmt = endian + "IIQQQQIIQQ"
+        sh_name_index = 0
+        sh_offset_index = 4
+        sh_size_index = 5
+    else:
+        raise RuntimeError(f"{reference_elf} has unsupported ELF class {elf_class}.")
+
+    ehdr_size = struct.calcsize(ehdr_fmt)
+    if len(data) < 0x10 + ehdr_size:
+        raise RuntimeError(f"{reference_elf} has a truncated ELF header.")
+
+    ehdr = struct.unpack_from(ehdr_fmt, data, 0x10)
+    shoff = ehdr[5]
+    shentsize = ehdr[10]
+    shnum = ehdr[11]
+    shstrndx = ehdr[12]
+    shdr_size = struct.calcsize(shdr_fmt)
+
+    if shentsize < shdr_size:
+        raise RuntimeError(f"{reference_elf} has an unsupported section header size.")
+    if not (0 <= shstrndx < shnum):
+        raise RuntimeError(f"{reference_elf} has an invalid section-string-table index.")
+
+    sections: list[tuple[int, ...]] = []
+    for index in range(shnum):
+        offset = shoff + index * shentsize
+        if offset + shdr_size > len(data):
+            raise RuntimeError(f"{reference_elf} has a truncated section header table.")
+        sections.append(struct.unpack_from(shdr_fmt, data, offset))
+
+    shstr = sections[shstrndx]
+    shstr_offset = shstr[sh_offset_index]
+    shstr_size = shstr[sh_size_index]
+    shstr_data = data[shstr_offset : shstr_offset + shstr_size]
+
+    def section_name(name_offset: int) -> str:
+        end = shstr_data.find(b"\0", name_offset)
+        if end < 0:
+            end = len(shstr_data)
+        return shstr_data[name_offset:end].decode("utf-8", errors="replace")
+
+    for section in sections:
+        name = section_name(section[sh_name_index])
+        if name not in FLASH_SECTION_NAMES:
+            continue
+
+        offset = section[sh_offset_index]
+        size = section[sh_size_index]
+        if offset + size > len(data):
+            raise RuntimeError(f"{reference_elf} has a truncated {name} section.")
+
+        with tempfile.TemporaryDirectory(prefix="split_flash_dump_", dir=flash_bin.parent) as tmp_dir:
+            tmp_flash_bin = Path(tmp_dir) / flash_bin.name
+            tmp_flash_bin.write_bytes(data[offset : offset + size])
+            os.replace(tmp_flash_bin, flash_bin)
+        return name
+
+    return None
 
 
 def parse_int(value: str) -> int:
@@ -338,6 +426,169 @@ def patch_external_flash_load_segments(elf: Path, flash_base: int, flash_size: i
     return patched
 
 
+def patch_orphan_alloc_sections(elf: Path) -> int:
+    """Make host loads match the remaining internal PT_LOADs.
+
+    After removing the external-flash section, llvm-objcopy can leave AC6
+    sections with SHF_ALLOC set even when their execution address is not where
+    the host loader must program them. Initialized RW data is the important
+    case: AC6 executes it from RAM, but the scatterloader copies its initial
+    contents from MRAM before main(). Keep those file bytes loadable at their
+    MRAM load address; hide only ZI/empty/padding regions that have no payload
+    in a remaining PT_LOAD.
+    """
+    data = bytearray(elf.read_bytes())
+    if len(data) < 0x34 or data[:4] != b"\x7fELF":
+        raise RuntimeError(f"{elf} is not an ELF file.")
+
+    elf_class = data[4]
+    endian_id = data[5]
+    if endian_id == 1:
+        endian = "<"
+    elif endian_id == 2:
+        endian = ">"
+    else:
+        raise RuntimeError(f"{elf} has an unsupported ELF data encoding.")
+
+    if elf_class == 1:
+        header_fmt = endian + "HHIIIIIHHHHHH"
+        ph_fmt = endian + "IIIIIIII"
+        sh_fmt = endian + "IIIIIIIIII"
+        e_phoff_index = 4
+        e_shoff_index = 5
+        e_phentsize_index = 8
+        e_phnum_index = 9
+        e_shentsize_index = 10
+        e_shnum_index = 11
+        e_shstrndx_index = 12
+        ph_type_index = 0
+        ph_offset_index = 1
+        ph_paddr_index = 3
+        ph_filesz_index = 4
+        sh_name_index = 0
+        sh_flags_index = 2
+        sh_addr_index = 3
+        sh_offset_index = 4
+        sh_size_index = 5
+        header_offset = 0x10
+    elif elf_class == 2:
+        header_fmt = endian + "HHIQQQIHHHHHH"
+        ph_fmt = endian + "IIQQQQQQ"
+        sh_fmt = endian + "IIQQQQIIQQ"
+        e_phoff_index = 4
+        e_shoff_index = 5
+        e_phentsize_index = 8
+        e_phnum_index = 9
+        e_shentsize_index = 10
+        e_shnum_index = 11
+        e_shstrndx_index = 12
+        ph_type_index = 0
+        ph_offset_index = 2
+        ph_paddr_index = 4
+        ph_filesz_index = 5
+        sh_name_index = 0
+        sh_flags_index = 2
+        sh_addr_index = 3
+        sh_offset_index = 4
+        sh_size_index = 5
+        header_offset = 0x10
+    else:
+        raise RuntimeError(f"{elf} has an unsupported ELF class.")
+
+    header_size = struct.calcsize(header_fmt)
+    if len(data) < header_offset + header_size:
+        raise RuntimeError(f"{elf} has a truncated ELF header.")
+
+    header = struct.unpack_from(header_fmt, data, header_offset)
+    phoff = header[e_phoff_index]
+    shoff = header[e_shoff_index]
+    phentsize = header[e_phentsize_index]
+    phnum = header[e_phnum_index]
+    shentsize = header[e_shentsize_index]
+    shnum = header[e_shnum_index]
+    shstrndx = header[e_shstrndx_index]
+    ph_size = struct.calcsize(ph_fmt)
+    sh_size = struct.calcsize(sh_fmt)
+
+    load_file_ranges: list[tuple[int, int, int]] = []
+    for index in range(phnum):
+        entry_offset = phoff + index * phentsize
+        if entry_offset + ph_size > len(data):
+            raise RuntimeError(f"{elf} has a truncated program header table.")
+        ph = struct.unpack_from(ph_fmt, data, entry_offset)
+        if ph[ph_type_index] != PT_LOAD:
+            continue
+        offset = ph[ph_offset_index]
+        paddr = ph[ph_paddr_index]
+        filesz = ph[ph_filesz_index]
+        if filesz:
+            load_file_ranges.append((offset, offset + filesz, paddr))
+
+    section_headers: list[tuple[int, list[int]]] = []
+    for index in range(shnum):
+        entry_offset = shoff + index * shentsize
+        if entry_offset + sh_size > len(data):
+            raise RuntimeError(f"{elf} has a truncated section header table.")
+        section_headers.append((entry_offset, list(struct.unpack_from(sh_fmt, data, entry_offset))))
+
+    if not (0 <= shstrndx < len(section_headers)):
+        raise RuntimeError(f"{elf} has an invalid section-string-table index.")
+    shstr = section_headers[shstrndx][1]
+    shstr_data = data[shstr[sh_offset_index] : shstr[sh_offset_index] + shstr[sh_size_index]]
+
+    def section_name(name_offset: int) -> str:
+        end = shstr_data.find(b"\0", name_offset)
+        if end < 0:
+            end = len(shstr_data)
+        return shstr_data[name_offset:end].decode("utf-8", errors="replace")
+
+    def load_address_for_file_range(offset: int, size: int) -> int | None:
+        if size == 0:
+            return None
+        end = offset + size
+        for start, stop, paddr in load_file_ranges:
+            if start <= offset and end <= stop:
+                return paddr + (offset - start)
+        return None
+
+    clearable_names = {
+        "RW_RAM",
+        "PADDING",
+        "ARM_LIB_HEAP",
+        "APP_HEAP",
+        "ARM_LIB_STACK",
+        *FLASH_SECTION_NAMES,
+    }
+    patched = 0
+    for entry_offset, section in section_headers:
+        flags = section[sh_flags_index]
+        if not (flags & SHF_ALLOC):
+            continue
+
+        name = section_name(section[sh_name_index])
+        offset = section[sh_offset_index]
+        size = section[sh_size_index]
+        load_addr = load_address_for_file_range(offset, size)
+        if name not in clearable_names and not (flags & SHF_WRITE):
+            continue
+
+        if load_addr is not None and name not in FLASH_SECTION_NAMES:
+            if section[sh_addr_index] != load_addr:
+                section[sh_addr_index] = load_addr
+                struct.pack_into(sh_fmt, data, entry_offset, *section)
+                patched += 1
+            continue
+
+        section[sh_flags_index] = flags & ~SHF_ALLOC
+        struct.pack_into(sh_fmt, data, entry_offset, *section)
+        patched += 1
+
+    if patched:
+        elf.write_bytes(data)
+
+    return patched
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
@@ -422,8 +673,11 @@ def main() -> int:
         except RuntimeError:
             if flash_bin.is_file() and flash_bin.stat().st_size > 0:
                 patched = patch_external_flash_load_segments(reference_elf, args.flash_base, args.flash_size)
+                orphan_sections = patch_orphan_alloc_sections(reference_elf)
                 if patched:
                     print(f"Removed {patched} stale external-flash LOAD segment(s) from: {reference_elf}")
+                if orphan_sections:
+                    print(f"Adjusted {orphan_sections} section header(s) for internal host loading in: {reference_elf}")
                 print(f"{reference_elf} is already internal-only; keeping existing OSPI flash image: {flash_bin}")
                 return 0
             raise RuntimeError(
@@ -440,10 +694,22 @@ def main() -> int:
                 [*(f"--remove-section={section_name}" for section_name in FLASH_SECTION_NAMES), str(reference_elf), str(tmp_elf)],
             )
             patched = patch_external_flash_load_segments(tmp_elf, args.flash_base, args.flash_size)
+            orphan_sections = patch_orphan_alloc_sections(tmp_elf)
             if patched:
                 print(f"Removed {patched} external-flash LOAD segment(s) from: {tmp_elf}")
+            if orphan_sections:
+                print(f"Adjusted {orphan_sections} section header(s) for internal host loading in: {tmp_elf}")
 
-            os.replace(tmp_elf, reference_elf)
+            try:
+                os.replace(tmp_elf, reference_elf)
+            except PermissionError:
+                patched = patch_external_flash_load_segments(reference_elf, args.flash_base, args.flash_size)
+                orphan_sections = patch_orphan_alloc_sections(reference_elf)
+                if patched:
+                    print(f"Removed {patched} external-flash LOAD segment(s) from locked target: {reference_elf}")
+                if orphan_sections:
+                    print(f"Adjusted {orphan_sections} section header(s) for internal host loading in locked target: {reference_elf}")
+                print(f"Could not replace locked ELF; patched existing ELF in place: {reference_elf}")
 
     except (FileNotFoundError, RuntimeError) as error:
         print(error, file=sys.stderr)

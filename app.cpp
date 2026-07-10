@@ -681,7 +681,7 @@ extern "C" int app(void);
 int app(void)
 {
   
-  printf("Test with splitting of elf\n");
+  printf("Test with splitting of elf 2\n");
   for(;;)
   {}
   executorch::runtime::runtime_init();
