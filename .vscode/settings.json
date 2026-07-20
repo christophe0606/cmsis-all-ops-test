@@ -6,7 +6,7 @@
     "memory-inspector.groupings.MAUsPerGroup": 4,
     "memory-inspector.scrollingBehavior": "Auto-Append",
     "clangd.arguments": [
-        "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\cmsis-all-ops-test\\out\\all_ops\\AE722F80F55D5LS\\Debug"
+        "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\cmsis-all-ops-test\\out\\debug\\AE722F80F55D5LS\\Debug"
     ],
     "fvpGdb.binary": "FVP_Corstone_SSE-300"
 }
