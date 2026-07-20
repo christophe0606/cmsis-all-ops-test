@@ -292,6 +292,7 @@ project:
         - file: ./embedded_models_blob.S
         - file: ./et_pal_override.cpp
         - file: ./container.c
+        - file: ./md5.c
 
   layers:
     - layer: $Board-Layer$

@@ -6,7 +6,6 @@
 #include "Driver_IO.h"
 #include "pinconf.h"
 #include "ospi_xip_user.h"
-#include "setup_flash_xip.h"
 #include "stdio.h"
 
 #define OSPI_RESET_PORT 15

@@ -10,9 +10,7 @@ __pycache__/
 run.sh
 md5.*
 flash.bin
-
-
-
+log.txt
 # models/, all_ops.cproject.yml and embedded_models_blob.S / embedded_models.{cpp,h}
 # are checked in here so the project builds standalone (the upstream generators
 # that produce them live in the ExecuTorch tree, not in this snapshot).

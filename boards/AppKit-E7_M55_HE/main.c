@@ -24,6 +24,7 @@
 
 #include "stdio.h"
 
+#include "setup_flash_xip.h"
 
 static void CpuCacheEnable(void)
 {
@@ -47,7 +48,15 @@ int main(void)
     /* Initialize STDOUT */
     stdout_init();
 
-    init_ospi_flash();
+    int err = init_ospi_flash();
+    if (err == 0) {
+        printf("OSPI Flash initialization failed\n");
+    }
+
+    err = setup_flash_xip();
+    if (err != 0) {
+        printf("OSPI Flash setup failed\n");
+    }
     
     /* Enable the CPU Cache */
     CpuCacheEnable();

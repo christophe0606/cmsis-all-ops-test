@@ -167,7 +167,7 @@ LR_EXTFLASH __EXTFLASH_BASE NOCOMPRESS __EXTFLASH_SIZE {
 
     . = ALIGN 16;
     __embedded_models_blob_start__ = .;
-    *embedded_models_blob*.o (.rodata.embedded_models*)
+    *embedded_models_blob*.o (.rodata.embedded_models*, +First)
     __embedded_models_blob_end__ = .;
 
     . = ALIGN 16;

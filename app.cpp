@@ -31,6 +31,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <memory>
+
 
 #include <executorch/runtime/core/data_loader.h>
 #include <executorch/runtime/core/error.h>
@@ -51,6 +53,11 @@
 #include "arm_embedded_module.hpp"
 #include "arm_memory_allocator.h"
 #include "container.h"
+
+extern "C"
+{
+  #include "md5.h"
+}
 
 using executorch::aten::Tensor;
 using executorch::runtime::DataLoader;
@@ -509,6 +516,22 @@ struct AlignedBuffer {
        return false;              \
    }
 
+   void disp_md5(size_t pte_size, const uint8_t* pte_data) 
+   {
+    unsigned char md5_sum[16];
+    char md5_hex[33];
+
+    md5_compute(pte_data, pte_size, md5_sum);
+    md5_to_hex(md5_sum, md5_hex);
+
+    printf("MD5: ");
+    for (int i = 0; i < 32; i++)
+    {
+        printf("%c", md5_hex[i]);
+    }
+    printf("\n");
+   }
+
   /**
    * @brief Runs one embedded model end-to-end and records its result.
    *
@@ -543,6 +566,7 @@ struct AlignedBuffer {
     size_t pte_size = get_object_length(m.object_index);
     std::memcpy(pte_data, container_pte_data, pte_size);
     auto loader = std::make_unique<BufferLoader>(pte_data, pte_size);
+    disp_md5(pte_size, pte_data);
     EmbeddedModule module_(pte_data,
                            pte_size,
                            std::move(loader),
@@ -678,13 +702,23 @@ extern "C" int app(void);
  * embedded model in sequence, and prints both per-operator and aggregate test
  * results. A zero return value means every embedded model passed.
  */
+
+extern const unsigned char _container_address_start[];
+
 int app(void)
 {
   
-  printf("Test with splitting of elf 2\n");
-  for(;;)
-  {}
+  printf("Test with external flash\n");
+  //const uint32_t *container_address_start = reinterpret_cast<const uint32_t*>(_container_address_start);
+  //printf("External access =%p\n", container_address_start);
+  //uint32_t w1 = container_address_start[0];
+  //uint32_t w2 = container_address_start[1];
+  //printf("container_address_start=%p, w1=%08x, w2=%08x\n", _container_address_start, w1, w2);
+  //
+  //for(;;)
+  //{}
   executorch::runtime::runtime_init();
+
 
   // Enable the DWT cycle counter so run_one_model can time each inference.
   reg32(kDemcr) |= (1u << 24);
