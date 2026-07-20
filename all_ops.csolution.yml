@@ -7,8 +7,8 @@ solution:
   created-for: CMSIS-Toolbox@2.14.0
   cdefault:
 
-  compiler: CLANG@22.1.0
-  #compiler: AC6@6.24.0
+  #compiler: CLANG@22.1.0
+  compiler: AC6@6.24.0
   #compiler: GCC@14.3.1
 
   packs:

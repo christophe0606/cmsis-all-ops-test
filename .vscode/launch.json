@@ -47,7 +47,7 @@
             "type": "gdbtarget",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "program": "out/debug/AE722F80F55D5LS/Debug/debug.elf",
+            "program": "out/debug/AE722F80F55D5LS/Debug/debug.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "preLaunchTask": "CMSIS Load",
@@ -87,7 +87,7 @@
             "type": "gdbtarget",
             "request": "attach",
             "cwd": "${workspaceFolder}/",
-            "program": "out/debug/AE722F80F55D5LS/Debug/debug.elf",
+            "program": "out/debug/AE722F80F55D5LS/Debug/debug.axf",
             "gdb": "arm-none-eabi-gdb",
             "auxiliaryGdb": true,
             "initCommands": [
