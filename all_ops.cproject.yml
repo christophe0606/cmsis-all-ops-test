@@ -248,6 +248,7 @@ project:
         - -fno-rtti
         - -std=c++17
         - -fno-exceptions
+        - -include random_device_shim.h
       Link: 
         - -Wl,--gc-sections
     # AC6: armlink's RW-data decompressor hardfaults at startup; disable RW
