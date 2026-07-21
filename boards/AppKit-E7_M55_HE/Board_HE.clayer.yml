@@ -62,6 +62,7 @@ layer:
     - component: Device:SOC Peripherals:MHU
 
     - component: Services:Retarget IO:STDOUT
+    - component: Services:Retarget IO:STDERR
 
     - component: Services:Secure Enclave:core&Source
     - component: Services:Secure Enclave:Initialization Helper&Source
@@ -76,6 +77,7 @@ layer:
 
     - component: CMSIS-Compiler:CORE
     - component: CMSIS-Compiler:STDOUT:Custom
+    - component: CMSIS-Compiler:STDERR:Custom
 
     - component: CMSIS Driver:GPIO
       define:

@@ -24,9 +24,16 @@ SHF_ALLOC = 0x2
 
 
 def objcopy_names() -> tuple[str, ...]:
+    """Return compatible objcopy names in preferred order.
+
+    LLVM objcopy is preferred because it also handles Arm Compiler 6 AXF
+    files.  GNU Arm Embedded builds normally provide arm-none-eabi-objcopy
+    instead; both tools support the options used by this script.
+    """
+    names = ("llvm-objcopy", "arm-none-eabi-objcopy")
     if os.name == "nt":
-        return ("llvm-objcopy.exe", "llvm-objcopy")
-    return ("llvm-objcopy", "llvm-objcopy.exe")
+        return tuple(f"{name}.exe" for name in names) + names
+    return names + tuple(f"{name}.exe" for name in names)
 
 
 def repo_path(path: str) -> Path:
@@ -149,9 +156,18 @@ def generated_toolchain_candidates() -> list[Path]:
 
         for entry in commands:
             command = entry.get("command", "")
-            match = re.search(r"([A-Za-z]:[/\\][^\" ]*[/\\]bin[/\\]clang(?:\+\+)?\.exe)", command)
+            # cbuild emits either LLVM (clang/armclang) or GNU Arm compiler
+            # paths here.  Accept quoted paths as toolchains can be installed
+            # below "Program Files".
+            match = re.search(
+                r'(?:"([^\"]+[/\\](?:clang(?:\+\+)?|armclang|arm-none-eabi-g(?:cc|\+\+))\.exe)"'
+                r'|([^\s\"]+[/\\](?:clang(?:\+\+)?|armclang|arm-none-eabi-g(?:cc|\+\+))\.exe))',
+                command,
+                re.IGNORECASE,
+            )
             if match:
-                candidates.extend(objcopy_candidates_from_dir(Path(match.group(1)).parent))
+                compiler = Path(match.group(1) or match.group(2))
+                candidates.extend(objcopy_candidates_from_dir(compiler.parent))
                 break
 
     return candidates
@@ -175,8 +191,13 @@ def vcpkg_artifact_candidates() -> list[Path]:
             continue
         seen.add(root)
 
-        for artifact in root.glob("*/compilers.arm.llvm.embedded/*/artifact.json"):
-            candidates.extend(objcopy_candidates_from_dir(artifact.parent))
+        artifact_patterns = (
+            "*/compilers.arm.llvm.embedded/*/artifact.json",
+            "*/compilers.arm.gnu/*/artifact.json",
+        )
+        for pattern in artifact_patterns:
+            for artifact in root.glob(pattern):
+                candidates.extend(objcopy_candidates_from_dir(artifact.parent))
 
     return candidates
 
@@ -195,7 +216,8 @@ def find_objcopy(explicit: str | None) -> str:
             return found
 
     raise FileNotFoundError(
-        "llvm-objcopy not found. Pass --objcopy with the path to llvm-objcopy."
+        "No compatible objcopy found (llvm-objcopy or arm-none-eabi-objcopy). "
+        "Pass --objcopy with the path to either tool."
     )
 
 
@@ -203,7 +225,7 @@ def run_objcopy(objcopy: str, args: list[str], error_message: str | None = None)
     completed = subprocess.run([objcopy, *args], check=False, capture_output=True, text=True)
     if completed.returncode != 0:
         detail = (completed.stderr or completed.stdout).strip()
-        raise RuntimeError(error_message or detail or f"llvm-objcopy failed with exit code {completed.returncode}")
+        raise RuntimeError(error_message or detail or f"objcopy failed with exit code {completed.returncode}")
 
 
 def flash_section_list() -> str:
@@ -335,7 +357,7 @@ def ranges_overlap(start: int, size: int, region_start: int, region_size: int) -
 def patch_external_flash_load_segments(elf: Path, flash_base: int, flash_size: int) -> int:
     """Turn external-flash PT_LOAD entries into PT_NULL entries.
 
-    llvm-objcopy --remove-section removes the .flash section header, but it can
+    objcopy --remove-section removes the .flash section header, but it can
     leave an orphan PT_LOAD program header. pyOCD programs PT_LOAD entries, so
     the internal ELF must remove those headers too.
     """
@@ -607,7 +629,11 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help=f"Output binary containing only the external-flash section. Default: {DEFAULT_FLASH_BIN}",
     )
-    parser.add_argument("--objcopy", default=None, help="Path to llvm-objcopy.")
+    parser.add_argument(
+        "--objcopy",
+        default=None,
+        help="Path to llvm-objcopy or arm-none-eabi-objcopy.",
+    )
     parser.add_argument(
         "--flash-base",
         default=DEFAULT_FLASH_BASE,

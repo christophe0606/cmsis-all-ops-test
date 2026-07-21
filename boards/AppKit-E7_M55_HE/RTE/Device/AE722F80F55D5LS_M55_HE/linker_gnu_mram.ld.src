@@ -87,9 +87,18 @@ SECTIONS
     LONG ( LOADADDR(.data.at_dtcm) )
     LONG ( ADDR(.data.at_dtcm) )
     LONG ( SIZEOF(.data.at_dtcm)/4 )
+    LONG ( LOADADDR(.tdata.at_dtcm) )
+    LONG ( ADDR(.tdata.at_dtcm) )
+    LONG ( SIZEOF(.tdata.at_dtcm)/4 )
     LONG ( LOADADDR(.code.at_itcm) )
     LONG ( ADDR(.code.at_itcm) )
     LONG ( SIZEOF(.code.at_itcm)/4 )
+    LONG ( LOADADDR(.premain.at_itcm) )
+    LONG ( ADDR(.premain.at_itcm) )
+    LONG ( SIZEOF(.premain.at_itcm)/4 )
+    LONG ( LOADADDR(.premain_runtime.at_itcm) )
+    LONG ( ADDR(.premain_runtime.at_itcm) )
+    LONG ( SIZEOF(.premain_runtime.at_itcm)/4 )
     __copy_table_end__ = .;
     . = ALIGN(16);
   } > MRAM
@@ -99,6 +108,8 @@ SECTIONS
     __zero_table_start__ = .;
     LONG (ADDR(.bss))
     LONG (SIZEOF(.bss)/4)
+    LONG (ADDR(.tbss))
+    LONG (SIZEOF(.tbss)/4)
 #if __HAS_BULK_SRAM
     LONG (ADDR(.bss.at_sram0))
     LONG (SIZEOF(.bss.at_sram0)/4)
@@ -107,9 +118,6 @@ SECTIONS
     . = ALIGN(16);
   } > MRAM
 
-  /* Caution: .got, .tdata and .tbss sections come under
-   * RELRO section. So keep it adjacent one after another.
-   */
   .got : ALIGN(8)
   {
     *(.got)
@@ -120,28 +128,32 @@ SECTIONS
     . = ALIGN(16);
   } > MRAM
 
-  /* Thread Local Storage sections */
-  .tdata.at_mram : ALIGN(16)
+  /* C++ initialization runs before main(), while OSPI XIP is still disabled.
+   * Consume only the registration constructor here; the kernel invocation
+   * wrappers from the same object remain available for .flash below.
+   */
+  .premain.at_itcm : ALIGN(8)
   {
-    /* TLS base = beginning of TLS block */
-    __tls_base = .;
-    /* Offset inside TLS block where TCB is expected */
-    __arm32_tls_tcb_offset = .;
-    /* Initialized TLS variables */
-    *(.tdata .tdata.* .gnu.linkonce.td.*)
-    __tdata_end = .;
+    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Registration*RegisterAllKernels*(.text._GLOBAL__sub_I* .text._Z41__static_initialization_and_destruction_0v)
     . = ALIGN(16);
-  } > MRAM
+  } > ITCM AT > MRAM
 
-  /* Thread-Local Uninitialized Data (.tbss) */
-  .tbss (NOLOAD) : ALIGN(16)
+  /* Use basename-only selectors here. GNU ld and LLD differ in how a file
+   * pattern containing a CMake target prefix interacts with EXCLUDE_FILE.
+   * These objects are the complete call path used by the constructor above.
+   */
+  .premain_runtime.at_itcm : ALIGN(8)
   {
-    *(.tbss .tbss.* .gnu.linkonce.tb.*)
-    /* TLS commons here */
-    *(.tcommon)
-    __tbss_end = .;
+    *operator_registry.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *operator_registry.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *minimal.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *minimal.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *platform.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *platform.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *abort.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *abort.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     . = ALIGN(16);
-  } > MRAM
+  } > ITCM AT > MRAM
 
   .flash APP_OSPI_FLASH_HE_BASE : ALIGN(16)
   {
@@ -158,9 +170,9 @@ SECTIONS
      * Before main() the OSPI XIP window is not enabled, so external flash is
      * limited to code that is only entered after the application enables XIP.
      */
-    *PyTorch_Machine_Learning_ExecuTorch_Runtime*(EXCLUDE_FILE(*minimal.o *platform.o *evalue.o *tensor_util*.o *tensor_impl.o *tensor_layout.o *operator_registry.o *runtime.o *abort.o *profiler.o *tag.o) .text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*(EXCLUDE_FILE(*minimal.o *minimal.cpp.o* *platform.o *platform.cpp.o* *evalue.o *evalue.cpp.o* *tensor_util*.o *tensor_util*.cpp.o* *tensor_impl.o *tensor_impl.cpp.o* *tensor_layout.o *tensor_layout.cpp.o* *operator_registry.o *operator_registry.cpp.o* *runtime.o *runtime.cpp.o* *abort.o *abort.cpp.o* *profiler.o *profiler.cpp.o* *tag.o *tag.cpp.o*) .text .text.* .gnu.linkonce.t.*)
     *PyTorch_Machine_Learning_ExecuTorch_Extension_Tensor*(.text .text.* .gnu.linkonce.t.*)
-    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Registration*(EXCLUDE_FILE(*RegisterAllKernels.o) .text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Registration*(.text .text.* .gnu.linkonce.t.*)
     *PyTorch_Machine_Learning_ExecuTorch_Operators_Cortex-M*(.text._ZN8cortex_m6native* .gnu.linkonce.t._ZN8cortex_m6native*)
     *PyTorch_Machine_Learning_ExecuTorch_Operators_Quantized*(.text .text.* .gnu.linkonce.t.*)
 
@@ -180,18 +192,29 @@ SECTIONS
   .code.at_itcm : ALIGN(8)
   {
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*minimal.o(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*minimal.cpp.o*(.text .text.* .gnu.linkonce.t.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*platform.o(.text .text.* .gnu.linkonce.t.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*platform.cpp.o*(.text .text.* .gnu.linkonce.t.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*evalue.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*evalue.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*tensor_util*.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*tensor_util*.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*tensor_impl.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*tensor_impl.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*tensor_layout.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*tensor_layout.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*operator_registry.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*operator_registry.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*runtime.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*runtime.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*abort.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*abort.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*profiler.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*profiler.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*tag.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
-    *PyTorch_Machine_Learning_ExecuTorch_Kernel_Registration*RegisterAllKernels.o(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*tag.cpp.o*(.text .text.* .rodata .rodata.* .gnu.linkonce.t.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Operators_Cortex-M*op_*.o(.text._Z*validate* .text._ZN10executorch7runtime*)
+    *PyTorch_Machine_Learning_ExecuTorch_Operators_Cortex-M*op_*.cpp.o*(.text._Z*validate* .text._ZN10executorch7runtime*)
     *(EXCLUDE_FILE(*PyTorch_Machine_Learning_ExecuTorch* *ARM_CMSIS_NN_Lib*) .text*)
     . = ALIGN(16);
   } > ITCM AT > MRAM
@@ -213,6 +236,26 @@ SECTIONS
     __exidx_end = .;
     . = ALIGN(16);
   } > DTCM AT > MRAM
+
+  /* Keep writable TLS in DTCM. Startup copies .tdata and clears .tbss
+   * before _start installs the TLS base and invokes constructors.
+   */
+  .tdata.at_dtcm : ALIGN(16)
+  {
+    __tls_base = .;
+    __arm32_tls_tcb_offset = .;
+    *(.tdata .tdata.* .gnu.linkonce.td.*)
+    __tdata_end = .;
+    . = ALIGN(16);
+  } > DTCM AT > MRAM
+
+  .tbss (NOLOAD) : ALIGN(16)
+  {
+    *(.tbss .tbss.* .gnu.linkonce.tb.*)
+    *(.tcommon)
+    __tbss_end = .;
+    . = ALIGN(16);
+  } > DTCM
 
 #if __HAS_BULK_SRAM
   .bss.at_sram0 (NOLOAD) : ALIGN(8)
@@ -314,7 +357,9 @@ SECTIONS
     *(.dtors)
 
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*minimal.o(.rodata .rodata.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*minimal.cpp.o*(.rodata .rodata.* .gnu.linkonce.r.*)
     *PyTorch_Machine_Learning_ExecuTorch_Runtime*platform.o(.rodata .rodata.* .gnu.linkonce.r.*)
+    *PyTorch_Machine_Learning_ExecuTorch_Runtime*platform.cpp.o*(.rodata .rodata.* .gnu.linkonce.r.*)
     *(EXCLUDE_FILE(*embedded_models_blob* *PyTorch_Machine_Learning_ExecuTorch* *ARM_CMSIS_NN_Lib*) .rodata*)
 
     KEEP(*(.eh_frame*))

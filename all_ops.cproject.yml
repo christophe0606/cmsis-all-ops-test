@@ -242,9 +242,11 @@ project:
     - for-compiler: CLANG
       C: 
         - -ffunction-sections
+        - -fdata-sections
         - -std=c11 
       CPP: 
         - -ffunction-sections
+        - -fdata-sections
         - -fno-rtti
         - -std=c++17
         - -fno-exceptions
@@ -257,10 +259,12 @@ project:
       C: 
        - -ffp-mode=full
        - -ffunction-sections
+       - -fdata-sections
        - -std=c11 
       CPP: 
        - -ffp-mode=full
        - -ffunction-sections
+       - -fdata-sections
        - -fno-rtti
        - -std=c++17
        - -fno-exceptions
@@ -269,9 +273,11 @@ project:
     - for-compiler: GCC
       C: 
        - -ffunction-sections
+       - -fdata-sections
        - -std=c11 
       CPP: 
        - -ffunction-sections
+       - -fdata-sections
        - -fno-rtti
        - -std=c++17
        - -fno-exceptions

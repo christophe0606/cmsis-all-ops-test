@@ -8,5 +8,6 @@
     "clangd.arguments": [
         "--compile-commands-dir=c:\\Users\\chrfav01\\benchresults\\cmsis-all-ops-test\\out\\all_ops\\AE722F80F55D5LS\\Debug"
     ],
-    "fvpGdb.binary": "FVP_Corstone_SSE-300"
+    "fvpGdb.binary": "FVP_Corstone_SSE-300",
+    "cdt.debug.sourceHighlighting": false
 }
